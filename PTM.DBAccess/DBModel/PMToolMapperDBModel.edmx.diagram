@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="154e10828b794566bca88ba501b62adf" Name="Diagram1">
+        <EntityTypeShape EntityType="PMToolMapperDBModel.AllFeature" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.MappingHistoryDetail" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.MigrationHistory" Width="1.5" PointX="3.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.PMTool" Width="1.5" PointX="6.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.ToolFeatureCategory" Width="1.5" PointX="6.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.UserLogin" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.ToolFeature" Width="1.5" PointX="3.375" PointY="6.75" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_MappingHistoryDetail_0_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_ToolFeatures_2_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_ToolFeatures_0_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_ToolFeatures_1_0" />
+        <EntityTypeShape EntityType="PMToolMapperDBModel.MappingHistory" Width="1.5" PointX="4" PointY="0.5" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_MappingHistory_0_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_MappingHistory_1_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_MappingHistory_2_0" />
+        <AssociationConnector Association="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

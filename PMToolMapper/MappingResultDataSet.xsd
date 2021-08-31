@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MappingResultDataSet" targetNamespace="http://tempuri.org/MappingResultDataSet.xsd" xmlns:mstns="http://tempuri.org/MappingResultDataSet.xsd" xmlns="http://tempuri.org/MappingResultDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MappingResultDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MappingResultDataSet" msprop:Generator_UserDSName="MappingResultDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Headings" msprop:Generator_TableClassName="HeadingsDataTable" msprop:Generator_TableVarName="tableHeadings" msprop:Generator_RowChangedName="HeadingsRowChanged" msprop:Generator_TablePropName="Headings" msprop:Generator_RowDeletingName="HeadingsRowDeleting" msprop:Generator_RowChangingName="HeadingsRowChanging" msprop:Generator_RowEvHandlerName="HeadingsRowChangeEventHandler" msprop:Generator_RowDeletedName="HeadingsRowDeleted" msprop:Generator_RowClassName="HeadingsRow" msprop:Generator_UserTableName="Headings" msprop:Generator_RowEvArgName="HeadingsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MappingFrom" msprop:Generator_ColumnVarNameInTable="columnMappingFrom" msprop:Generator_ColumnPropNameInRow="MappingFrom" msprop:Generator_ColumnPropNameInTable="MappingFromColumn" msprop:Generator_UserColumnName="MappingFrom" type="xs:string" minOccurs="0" />
+              <xs:element name="MappingTo" msprop:Generator_ColumnVarNameInTable="columnMappingTo" msprop:Generator_ColumnPropNameInRow="MappingTo" msprop:Generator_ColumnPropNameInTable="MappingToColumn" msprop:Generator_UserColumnName="MappingTo" type="xs:string" minOccurs="0" />
+              <xs:element name="MappedBy" msprop:Generator_ColumnVarNameInTable="columnMappedBy" msprop:Generator_ColumnPropNameInRow="MappedBy" msprop:Generator_ColumnPropNameInTable="MappedByColumn" msprop:Generator_UserColumnName="MappedBy" type="xs:string" minOccurs="0" />
+              <xs:element name="MappedDate" msprop:Generator_ColumnVarNameInTable="columnMappedDate" msprop:Generator_ColumnPropNameInRow="MappedDate" msprop:Generator_ColumnPropNameInTable="MappedDateColumn" msprop:Generator_UserColumnName="MappedDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MappingPercentage" msprop:Generator_ColumnVarNameInTable="columnMappingPercentage" msprop:Generator_ColumnPropNameInRow="MappingPercentage" msprop:Generator_ColumnPropNameInTable="MappingPercentageColumn" msprop:Generator_UserColumnName="MappingPercentage" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MappingData" msprop:Generator_TableClassName="MappingDataDataTable" msprop:Generator_TableVarName="tableMappingData" msprop:Generator_RowChangedName="MappingDataRowChanged" msprop:Generator_TablePropName="MappingData" msprop:Generator_RowDeletingName="MappingDataRowDeleting" msprop:Generator_RowChangingName="MappingDataRowChanging" msprop:Generator_RowEvHandlerName="MappingDataRowChangeEventHandler" msprop:Generator_RowDeletedName="MappingDataRowDeleted" msprop:Generator_RowClassName="MappingDataRow" msprop:Generator_UserTableName="MappingData" msprop:Generator_RowEvArgName="MappingDataRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MappingFromYesNo" msprop:Generator_ColumnVarNameInTable="columnMappingFromYesNo" msprop:Generator_ColumnPropNameInRow="MappingFromYesNo" msprop:Generator_ColumnPropNameInTable="MappingFromYesNoColumn" msprop:Generator_UserColumnName="MappingFromYesNo" type="xs:string" minOccurs="0" />
+              <xs:element name="MappingToYesNo" msprop:Generator_ColumnVarNameInTable="columnMappingToYesNo" msprop:Generator_ColumnPropNameInRow="MappingToYesNo" msprop:Generator_ColumnPropNameInTable="MappingToYesNoColumn" msprop:Generator_UserColumnName="MappingToYesNo" type="xs:string" minOccurs="0" />
+              <xs:element name="FeatureName" msprop:Generator_ColumnVarNameInTable="columnFeatureName" msprop:Generator_ColumnPropNameInRow="FeatureName" msprop:Generator_ColumnPropNameInTable="FeatureNameColumn" msprop:Generator_UserColumnName="FeatureName" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

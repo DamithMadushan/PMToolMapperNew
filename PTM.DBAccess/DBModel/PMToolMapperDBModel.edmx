@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PMToolMapperDBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=&quot;D:\Visual Studio Projects\Git Repositories\PMToolMapper\PMToolMapper\PMToolMapper\Database\PMToolMapperDB.db&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AllFeatures">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="integer" Nullable="false" />
+          <Property Name="FeatureName" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="MappingHistory">
+          <Key>
+            <PropertyRef Name="MappingId" />
+          </Key>
+          <Property Name="MappingId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OldToolId" Type="integer" />
+          <Property Name="NewToolId" Type="integer" />
+          <Property Name="UserId" Type="integer" />
+          <Property Name="Date" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="MappingPercentage" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="MappingHistoryDetail">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MappingId" Type="integer" />
+          <Property Name="FeatureId" Type="integer" />
+          <Property Name="OldToolYesNo" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NewToolYesNo" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="integer" Nullable="false" />
+          <Property Name="OldToolId" Type="integer" />
+          <Property Name="NewToolId" Type="integer" />
+          <Property Name="UserId" Type="integer" />
+          <Property Name="Date" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="MigrationPercentage" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="PMTool">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="integer" Nullable="false" />
+          <Property Name="ToolName" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="ToolFeatureCategories">
+          <Key>
+            <PropertyRef Name="FeatureCategoryId" />
+          </Key>
+          <Property Name="FeatureCategoryId" Type="integer" Nullable="false" />
+          <Property Name="FeatureCategoryName" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="ToolFeatures">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="FeatureId" Type="integer" />
+          <Property Name="FeatureCategoryId" Type="integer" />
+          <Property Name="ToolId" Type="integer" />
+          <Property Name="FeatureUrl" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FeatureStatus" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Date" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFullName" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
+        <Association Name="FK_MappingHistory_0_0">
+          <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
+          <End Role="MappingHistory" Type="Self.MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="NewToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistory_1_0">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
+          <End Role="MappingHistory" Type="Self.MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistory_2_0">
+          <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
+          <End Role="MappingHistory" Type="Self.MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="OldToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistoryDetail_0_0">
+          <End Role="MappingHistory" Type="Self.MappingHistory" Multiplicity="0..1" />
+          <End Role="MappingHistoryDetail" Type="Self.MappingHistoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MappingHistory">
+              <PropertyRef Name="MappingId" />
+            </Principal>
+            <Dependent Role="MappingHistoryDetail">
+              <PropertyRef Name="MappingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistoryDetail_1_0">
+          <End Role="AllFeatures" Type="Self.AllFeatures" Multiplicity="0..1" />
+          <End Role="MappingHistoryDetail" Type="Self.MappingHistoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AllFeatures">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="MappingHistoryDetail">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_0_0">
+          <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
+          <End Role="ToolFeatures" Type="Self.ToolFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="ToolFeatures">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_1_0">
+          <End Role="ToolFeatureCategories" Type="Self.ToolFeatureCategories" Multiplicity="0..1" />
+          <End Role="ToolFeatures" Type="Self.ToolFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToolFeatureCategories">
+              <PropertyRef Name="FeatureCategoryId" />
+            </Principal>
+            <Dependent Role="ToolFeatures">
+              <PropertyRef Name="FeatureCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_2_0">
+          <End Role="AllFeatures" Type="Self.AllFeatures" Multiplicity="0..1" />
+          <End Role="ToolFeatures" Type="Self.ToolFeatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AllFeatures">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="ToolFeatures">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PMToolMapperDBModelStoreContainer">
+          <EntitySet Name="AllFeatures" EntityType="Self.AllFeatures" store:Type="Tables" />
+          <EntitySet Name="MappingHistory" EntityType="Self.MappingHistory" store:Type="Tables" />
+          <EntitySet Name="MappingHistoryDetail" EntityType="Self.MappingHistoryDetail" store:Type="Tables" />
+          <EntitySet Name="MigrationHistory" EntityType="Self.MigrationHistory" store:Type="Tables" />
+          <EntitySet Name="PMTool" EntityType="Self.PMTool" store:Type="Tables" />
+          <EntitySet Name="ToolFeatureCategories" EntityType="Self.ToolFeatureCategories" store:Type="Tables" />
+          <EntitySet Name="ToolFeatures" EntityType="Self.ToolFeatures" store:Type="Tables" />
+          <EntitySet Name="UserLogin" EntityType="Self.UserLogin" store:Type="Tables" />
+          <AssociationSet Name="FK_MappingHistory_0_0" Association="Self.FK_MappingHistory_0_0">
+            <End Role="PMTool" EntitySet="PMTool" />
+            <End Role="MappingHistory" EntitySet="MappingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistory_1_0" Association="Self.FK_MappingHistory_1_0">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="MappingHistory" EntitySet="MappingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistory_2_0" Association="Self.FK_MappingHistory_2_0">
+            <End Role="PMTool" EntitySet="PMTool" />
+            <End Role="MappingHistory" EntitySet="MappingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistoryDetail_0_0" Association="Self.FK_MappingHistoryDetail_0_0">
+            <End Role="MappingHistory" EntitySet="MappingHistory" />
+            <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistoryDetail_1_0" Association="Self.FK_MappingHistoryDetail_1_0">
+            <End Role="AllFeatures" EntitySet="AllFeatures" />
+            <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_0_0" Association="Self.FK_ToolFeatures_0_0">
+            <End Role="PMTool" EntitySet="PMTool" />
+            <End Role="ToolFeatures" EntitySet="ToolFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_1_0" Association="Self.FK_ToolFeatures_1_0">
+            <End Role="ToolFeatureCategories" EntitySet="ToolFeatureCategories" />
+            <End Role="ToolFeatures" EntitySet="ToolFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_2_0" Association="Self.FK_ToolFeatures_2_0">
+            <End Role="AllFeatures" EntitySet="AllFeatures" />
+            <End Role="ToolFeatures" EntitySet="ToolFeatures" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PMToolMapperDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AllFeature">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="Int64" Nullable="false" />
+          <Property Name="FeatureName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MappingHistoryDetails" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_0_0" FromRole="AllFeature" ToRole="MappingHistoryDetail" />
+          <NavigationProperty Name="ToolFeatures" Relationship="PMToolMapperDBModel.FK_ToolFeatures_2_0" FromRole="AllFeature" ToRole="ToolFeature" />
+        </EntityType>
+        <EntityType Name="MappingHistoryDetail">
+          <Key>
+            <PropertyRef Name="DetailId" />
+          </Key>
+          <Property Name="DetailId" Type="Int64" Nullable="false" />
+          <Property Name="MappingId" Type="Int64" />
+          <Property Name="FeatureId" Type="Int64" />
+          <Property Name="OldToolYesNo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NewToolYesNo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AllFeature" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_0_0" FromRole="MappingHistoryDetail" ToRole="AllFeature" />
+          <NavigationProperty Name="MappingHistory" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0" FromRole="MappingHistoryDetail" ToRole="MappingHistory" />
+        </EntityType>
+        <EntityType Name="MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="Int64" Nullable="false" />
+          <Property Name="OldToolId" Type="Int64" />
+          <Property Name="NewToolId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="MigrationPercentage" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PMTool">
+          <Key>
+            <PropertyRef Name="ToolId" />
+          </Key>
+          <Property Name="ToolId" Type="Int64" Nullable="false" />
+          <Property Name="ToolName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToolFeatures" Relationship="PMToolMapperDBModel.FK_ToolFeatures_0_0" FromRole="PMTool" ToRole="ToolFeature" />
+          <NavigationProperty Name="MappingHistories" Relationship="PMToolMapperDBModel.FK_MappingHistory_0_0" FromRole="PMTool" ToRole="MappingHistory" />
+          <NavigationProperty Name="MappingHistories1" Relationship="PMToolMapperDBModel.FK_MappingHistory_2_0" FromRole="PMTool" ToRole="MappingHistory" />
+        </EntityType>
+        <EntityType Name="ToolFeatureCategory">
+          <Key>
+            <PropertyRef Name="FeatureCategoryId" />
+          </Key>
+          <Property Name="FeatureCategoryId" Type="Int64" Nullable="false" />
+          <Property Name="FeatureCategoryName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToolFeatures" Relationship="PMToolMapperDBModel.FK_ToolFeatures_1_0" FromRole="ToolFeatureCategory" ToRole="ToolFeature" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFullName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MappingHistories" Relationship="PMToolMapperDBModel.FK_MappingHistory_1_0" FromRole="UserLogin" ToRole="MappingHistory" />
+        </EntityType>
+        <EntityContainer Name="PMToolMapperDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AllFeatures" EntityType="Self.AllFeature" />
+          <EntitySet Name="MappingHistoryDetails" EntityType="Self.MappingHistoryDetail" />
+          <EntitySet Name="MigrationHistories" EntityType="Self.MigrationHistory" />
+          <EntitySet Name="PMTools" EntityType="Self.PMTool" />
+          <EntitySet Name="ToolFeatureCategories" EntityType="Self.ToolFeatureCategory" />
+          <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
+          <EntitySet Name="ToolFeatures" EntityType="PMToolMapperDBModel.ToolFeature" />
+          <AssociationSet Name="FK_MappingHistoryDetail_0_0" Association="PMToolMapperDBModel.FK_MappingHistoryDetail_0_0">
+            <End Role="AllFeature" EntitySet="AllFeatures" />
+            <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_2_0" Association="PMToolMapperDBModel.FK_ToolFeatures_2_0">
+            <End Role="AllFeature" EntitySet="AllFeatures" />
+            <End Role="ToolFeature" EntitySet="ToolFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_0_0" Association="PMToolMapperDBModel.FK_ToolFeatures_0_0">
+            <End Role="PMTool" EntitySet="PMTools" />
+            <End Role="ToolFeature" EntitySet="ToolFeatures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToolFeatures_1_0" Association="PMToolMapperDBModel.FK_ToolFeatures_1_0">
+            <End Role="ToolFeatureCategory" EntitySet="ToolFeatureCategories" />
+            <End Role="ToolFeature" EntitySet="ToolFeatures" />
+          </AssociationSet>
+          <EntitySet Name="MappingHistories" EntityType="PMToolMapperDBModel.MappingHistory" />
+          <AssociationSet Name="FK_MappingHistory_0_0" Association="PMToolMapperDBModel.FK_MappingHistory_0_0">
+            <End Role="PMTool" EntitySet="PMTools" />
+            <End Role="MappingHistory" EntitySet="MappingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistory_1_0" Association="PMToolMapperDBModel.FK_MappingHistory_1_0">
+            <End Role="UserLogin" EntitySet="UserLogins" />
+            <End Role="MappingHistory" EntitySet="MappingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistory_2_0" Association="PMToolMapperDBModel.FK_MappingHistory_2_0">
+            <End Role="PMTool" EntitySet="PMTools" />
+            <End Role="MappingHistory" EntitySet="MappingHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MappingHistoryDetail_1_0" Association="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0">
+            <End Role="MappingHistory" EntitySet="MappingHistories" />
+            <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ToolFeature">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="FeatureId" Type="Int64" />
+          <Property Name="FeatureCategoryId" Type="Int64" />
+          <Property Name="ToolId" Type="Int64" />
+          <Property Name="FeatureUrl" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FeatureStatus" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AllFeature" Relationship="PMToolMapperDBModel.FK_ToolFeatures_2_0" FromRole="ToolFeature" ToRole="AllFeature" />
+          <NavigationProperty Name="PMTool" Relationship="PMToolMapperDBModel.FK_ToolFeatures_0_0" FromRole="ToolFeature" ToRole="PMTool" />
+          <NavigationProperty Name="ToolFeatureCategory" Relationship="PMToolMapperDBModel.FK_ToolFeatures_1_0" FromRole="ToolFeature" ToRole="ToolFeatureCategory" />
+        </EntityType>
+        <Association Name="FK_MappingHistoryDetail_0_0">
+          <End Type="PMToolMapperDBModel.AllFeature" Role="AllFeature" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MappingHistoryDetail" Role="MappingHistoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AllFeature">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="MappingHistoryDetail">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_2_0">
+          <End Type="PMToolMapperDBModel.AllFeature" Role="AllFeature" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.ToolFeature" Role="ToolFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AllFeature">
+              <PropertyRef Name="FeatureId" />
+            </Principal>
+            <Dependent Role="ToolFeature">
+              <PropertyRef Name="FeatureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_0_0">
+          <End Type="PMToolMapperDBModel.PMTool" Role="PMTool" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.ToolFeature" Role="ToolFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="ToolFeature">
+              <PropertyRef Name="ToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToolFeatures_1_0">
+          <End Type="PMToolMapperDBModel.ToolFeatureCategory" Role="ToolFeatureCategory" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.ToolFeature" Role="ToolFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToolFeatureCategory">
+              <PropertyRef Name="FeatureCategoryId" />
+            </Principal>
+            <Dependent Role="ToolFeature">
+              <PropertyRef Name="FeatureCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MappingHistory">
+          <Key>
+            <PropertyRef Name="MappingId" />
+          </Key>
+          <Property Name="MappingId" Type="Int64" Nullable="false" />
+          <Property Name="OldToolId" Type="Int64" />
+          <Property Name="NewToolId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="MappingPercentage" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PMTool" Relationship="PMToolMapperDBModel.FK_MappingHistory_0_0" FromRole="MappingHistory" ToRole="PMTool" />
+          <NavigationProperty Name="UserLogin" Relationship="PMToolMapperDBModel.FK_MappingHistory_1_0" FromRole="MappingHistory" ToRole="UserLogin" />
+          <NavigationProperty Name="PMTool1" Relationship="PMToolMapperDBModel.FK_MappingHistory_2_0" FromRole="MappingHistory" ToRole="PMTool" />
+          <NavigationProperty Name="MappingHistoryDetails" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0" FromRole="MappingHistory" ToRole="MappingHistoryDetail" />
+        </EntityType>
+        <Association Name="FK_MappingHistory_0_0">
+          <End Type="PMToolMapperDBModel.PMTool" Role="PMTool" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MappingHistory" Role="MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="OldToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistory_1_0">
+          <End Type="PMToolMapperDBModel.UserLogin" Role="UserLogin" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MappingHistory" Role="MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistory_2_0">
+          <End Type="PMToolMapperDBModel.PMTool" Role="PMTool" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MappingHistory" Role="MappingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MappingHistory">
+              <PropertyRef Name="NewToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MappingHistoryDetail_1_0">
+          <End Type="PMToolMapperDBModel.MappingHistory" Role="MappingHistory" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MappingHistoryDetail" Role="MappingHistoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MappingHistory">
+              <PropertyRef Name="MappingId" />
+            </Principal>
+            <Dependent Role="MappingHistoryDetail">
+              <PropertyRef Name="MappingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PMToolMapperDBModelStoreContainer" CdmEntityContainer="PMToolMapperDBEntities">
+          <EntitySetMapping Name="AllFeatures">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.AllFeature">
+              <MappingFragment StoreEntitySet="AllFeatures">
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MappingHistoryDetails">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.MappingHistoryDetail">
+              <MappingFragment StoreEntitySet="MappingHistoryDetail">
+                <ScalarProperty Name="NewToolYesNo" ColumnName="NewToolYesNo" />
+                <ScalarProperty Name="OldToolYesNo" ColumnName="OldToolYesNo" />
+                <ScalarProperty Name="DetailId" ColumnName="DetailId" />
+                <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MigrationHistories">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.MigrationHistory">
+              <MappingFragment StoreEntitySet="MigrationHistory">
+                <ScalarProperty Name="MigrationPercentage" ColumnName="MigrationPercentage" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="OldToolId" ColumnName="OldToolId" />
+                <ScalarProperty Name="NewToolId" ColumnName="NewToolId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMTools">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.PMTool">
+              <MappingFragment StoreEntitySet="PMTool">
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="ToolName" ColumnName="ToolName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToolFeatureCategories">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.ToolFeatureCategory">
+              <MappingFragment StoreEntitySet="ToolFeatureCategories">
+                <ScalarProperty Name="FeatureCategoryId" ColumnName="FeatureCategoryId" />
+                <ScalarProperty Name="FeatureCategoryName" ColumnName="FeatureCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogins">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogin">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToolFeatures">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.ToolFeature">
+              <MappingFragment StoreEntitySet="ToolFeatures">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FeatureStatus" ColumnName="FeatureStatus" />
+                <ScalarProperty Name="FeatureUrl" ColumnName="FeatureUrl" />
+                <ScalarProperty Name="ToolId" ColumnName="ToolId" />
+                <ScalarProperty Name="FeatureCategoryId" ColumnName="FeatureCategoryId" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MappingHistories">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.MappingHistory">
+              <MappingFragment StoreEntitySet="MappingHistory">
+                <ScalarProperty Name="MappingPercentage" ColumnName="MappingPercentage" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NewToolId" ColumnName="NewToolId" />
+                <ScalarProperty Name="OldToolId" ColumnName="OldToolId" />
+                <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

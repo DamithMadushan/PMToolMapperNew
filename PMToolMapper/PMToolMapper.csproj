@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67C7C430-3807-4609-B805-C92A40297102}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PMToolMapper</RootNamespace>
+    <AssemblyName>PMToolMapper</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pmticon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.114.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.114.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.114.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CrystalReportMappingResults.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportMappingResults.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataLoading.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataLoading.Designer.cs">
+      <DependentUpon>DataLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateReports.Designer.cs">
+      <DependentUpon>GenerateReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupingFeatures.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GroupingFeatures.Designer.cs">
+      <DependentUpon>GroupingFeatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MappingResultDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MappingResultDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PMToolMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PMToolMapping.Designer.cs">
+      <DependentUpon>PMToolMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Custom Designs\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Resources\Custom Designs\RoundCornersButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Resources\Custom Designs\RoundTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ToolMapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolMapping.Designer.cs">
+      <DependentUpon>ToolMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolMappingResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolMappingResults.Designer.cs">
+      <DependentUpon>ToolMappingResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolMigration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolMigration.Designer.cs">
+      <DependentUpon>ToolMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolMigrationHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolMigrationHistory.Designer.cs">
+      <DependentUpon>ToolMigrationHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TooMappingResultReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TooMappingResultReport.Designer.cs">
+      <DependentUpon>TooMappingResultReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserLogin.Designer.cs">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManager.Designer.cs">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CrystalReportMappingResults.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportMappingResults.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataLoading.resx">
+      <DependentUpon>DataLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateReports.resx">
+      <DependentUpon>GenerateReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupingFeatures.resx">
+      <DependentUpon>GroupingFeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PMToolMapping.resx">
+      <DependentUpon>PMToolMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ToolMapping.resx">
+      <DependentUpon>ToolMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolMappingResults.resx">
+      <DependentUpon>ToolMappingResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolMigration.resx">
+      <DependentUpon>ToolMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolMigrationHistory.resx">
+      <DependentUpon>ToolMigrationHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TooMappingResultReport.resx">
+      <DependentUpon>TooMappingResultReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLogin.resx">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManager.resx">
+      <DependentUpon>UserManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Database\PMToolMapperDB.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MappingResultDataSet.xsc">
+      <DependentUpon>MappingResultDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MappingResultDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MappingResultDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MappingResultDataSet.xss">
+      <DependentUpon>MappingResultDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="pmticon.ico" />
+    <Content Include="Resources\Images\homenew.png" />
+    <Content Include="Resources\Images\ld.gif" />
+    <Content Include="Resources\Images\loading-buffering.gif" />
+    <Content Include="Resources\Images\loading.gif" />
+    <Content Include="Resources\Images\myqaio-loader2.gif" />
+    <Content Include="Resources\Images\pmticon.ico" />
+    <Content Include="Resources\Images\pmtlogin.jpg" />
+    <Content Include="Resources\Images\settings32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PTM.BusinessLogic\PTM.BusinessLogic.csproj">
+      <Project>{B9AC7041-F921-4A7F-AA7F-B0D05471029F}</Project>
+      <Name>PTM.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PTM.DBAccess\PTM.DBAccess.csproj">
+      <Project>{ACC2A1BD-E6CD-42F5-8AE6-7B95FCFFBB92}</Project>
+      <Name>PTM.DBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PTM.Model\PTM.Model.csproj">
+      <Project>{0C054462-EB70-48D7-BB4F-C037E2D1FE95}</Project>
+      <Name>PTM.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.114.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>
