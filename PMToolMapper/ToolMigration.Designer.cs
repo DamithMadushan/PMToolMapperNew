@@ -50,6 +50,7 @@
             this.btnMigrate = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnDestinationLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnCurrentLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
+            this.jiraInfo1 = new PMToolMapper.JiraInfo();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -281,6 +282,7 @@
             this.btnDestinationLogin.TabIndex = 31;
             this.btnDestinationLogin.Text = "Login";
             this.btnDestinationLogin.UseVisualStyleBackColor = false;
+            this.btnDestinationLogin.Click += new System.EventHandler(this.btnDestinationLogin_Click);
             // 
             // btnCurrentLogin
             // 
@@ -294,12 +296,23 @@
             this.btnCurrentLogin.TabIndex = 17;
             this.btnCurrentLogin.Text = "Login";
             this.btnCurrentLogin.UseVisualStyleBackColor = false;
+            this.btnCurrentLogin.Click += new System.EventHandler(this.btnCurrentLogin_Click);
+            // 
+            // jiraInfo1
+            // 
+            this.jiraInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.jiraInfo1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.jiraInfo1.Location = new System.Drawing.Point(372, 138);
+            this.jiraInfo1.Name = "jiraInfo1";
+            this.jiraInfo1.Size = new System.Drawing.Size(573, 288);
+            this.jiraInfo1.TabIndex = 38;
             // 
             // ToolMigration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.jiraInfo1);
             this.Controls.Add(this.comboBoxSelectProjectEnd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxSelectProject);
@@ -355,5 +368,6 @@
         private System.Windows.Forms.Label lblSelectProject;
         private System.Windows.Forms.ComboBox comboBoxSelectProjectEnd;
         private System.Windows.Forms.Label label1;
+        private JiraInfo jiraInfo1;
     }
 }

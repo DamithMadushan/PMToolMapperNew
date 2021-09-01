@@ -50,6 +50,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -98,6 +104,12 @@
     </Compile>
     <Compile Include="GroupingFeatures.Designer.cs">
       <DependentUpon>GroupingFeatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JiraInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="JiraInfo.Designer.cs">
+      <DependentUpon>JiraInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="MappingResultDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -175,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GroupingFeatures.resx">
       <DependentUpon>GroupingFeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JiraInfo.resx">
+      <DependentUpon>JiraInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PMToolMapping.resx">
       <DependentUpon>PMToolMapping.cs</DependentUpon>

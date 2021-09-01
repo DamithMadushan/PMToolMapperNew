@@ -43,9 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AllFeaturesModel.cs" />
+    <Compile Include="Models\JiraInfoModel.cs" />
     <Compile Include="Models\LoadingMessage.cs" />
     <Compile Include="Models\MappingHistoryModel.cs" />
     <Compile Include="Models\MappingHistoryDetailModel.cs" />
+    <Compile Include="Models\ProjectDropdown.cs" />
     <Compile Include="Models\SharedDataModel.cs" />
     <Compile Include="Models\PMtoolModel.cs" />
     <Compile Include="Models\ToolFeatureCategoriesModel.cs" />
