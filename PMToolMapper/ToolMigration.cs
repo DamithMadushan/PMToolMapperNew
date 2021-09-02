@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,10 +28,12 @@ namespace PMToolMapper
             InitializeComponent();
 
             jiraInfo1.Visible = false;
+            tfsInfo1.Visible = false;
 
             loadDropDowns();
 
-            jiraInfo1.OkButtonClick += new EventHandler(getProjectsJira);
+            jiraInfo1.OkButtonClickJira += new EventHandler(getProjectsJira);
+            tfsInfo1.OkButtonClickTFS += new EventHandler(getProjectsTFS);
         }
 
         private void lblLogin1_Click(object sender, EventArgs e)
@@ -70,9 +74,9 @@ namespace PMToolMapper
 
             drpCurrent.DataSource = pMtoolModels;
             drpCurrent.DisplayMember = "ToolName";
-            drpCurrent.ValueMember = "ToolId";            
-            
-            
+            drpCurrent.ValueMember = "ToolId";
+
+
             drpDestination.DataSource = pMtoolModels2;
             drpDestination.DisplayMember = "ToolName";
             drpDestination.ValueMember = "ToolId";
@@ -94,6 +98,10 @@ namespace PMToolMapper
                 jiraInfo1.Visible = true;
 
             }
+            else if (drpCurrent.Text == "TFS")
+            {
+                tfsInfo1.Visible = true;
+            }
 
         }
 
@@ -103,15 +111,13 @@ namespace PMToolMapper
 
             try
             {
-                //if jira selected
-                if (drpCurrent.Text == "Jira")
-                {
+
 
                     if (!string.IsNullOrEmpty(JiraInfoModel.Url) && !string.IsNullOrEmpty(JiraInfoModel.Url) && !string.IsNullOrEmpty(JiraInfoModel.Url))
                     {
 
                         string url = "https://api.atlassian.com/ex/jira/" + JiraInfoModel.Url + "/rest/api/3/project";
-                        var response = GetResponse(url);
+                        var response = GetResponseProjectsJira(url);
 
                         dynamic res = JsonConvert.DeserializeObject<List<JiraRoot>>(response.Content);
 
@@ -121,15 +127,15 @@ namespace PMToolMapper
                         foreach (JiraRoot projectData in res)
                         {
 
-                                ProjectDropdown projectDropdown = new ProjectDropdown()
-                                {
+                            ProjectDropdown projectDropdown = new ProjectDropdown()
+                            {
 
-                                    ProjectId = projectData.id,
-                                    ProjectName = projectData.name
+                                ProjectId = projectData.id,
+                                ProjectName = projectData.name
 
-                                };
+                            };
 
-                                projects.Add(projectDropdown);
+                            projects.Add(projectDropdown);
 
 
 
@@ -164,7 +170,7 @@ namespace PMToolMapper
                     }
 
 
-                }
+                
             }
             catch (Exception ex)
             {
@@ -177,7 +183,7 @@ namespace PMToolMapper
         }
 
 
-        public IRestResponse GetResponse(string url, Method method = Method.GET)
+        public IRestResponse GetResponseProjectsJira(string url, Method method = Method.GET)
         {
             string email = JiraInfoModel.Email;
             string token = JiraInfoModel.Token;
@@ -190,6 +196,105 @@ namespace PMToolMapper
             return response;
         }
 
+
+
+        public IRestResponse GetResponseProjectsTFS(string url, string personalAccessToken, Method method = Method.GET)
+        {
+
+            string encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(string.Format("{0}:{1}", "", personalAccessToken)));
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("Authorization", $"Basic {encoded}");
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
+
+
+
+        private void getProjectsTFS(object sender, EventArgs e)
+        {
+
+            try
+            {
+
+                    if (!string.IsNullOrEmpty(TFSInfoModel.Organization) && !string.IsNullOrEmpty(TFSInfoModel.Token))
+                    {
+
+                        string token = TFSInfoModel.Token;
+                        string org = TFSInfoModel.Organization;
+                        string url = "https://dev.azure.com/" + org + "/_apis/projects?stateFilter=All&api-version=1.0";
+
+
+                        var response = GetResponseProjectsTFS(url, token);
+
+                        dynamic res = JsonConvert.DeserializeObject<TFSRoot>(response.Content);
+
+
+                        List<ProjectDropdown> projects = new List<ProjectDropdown>();
+
+                        foreach (TFSValue projectData in res.value)
+                        {
+
+                            ProjectDropdown projectDropdown = new ProjectDropdown()
+                            {
+
+                                ProjectId = projectData.id,
+                                ProjectName = projectData.name
+
+                            };
+
+                            projects.Add(projectDropdown);
+
+
+
+                        }
+
+                        if (LoginOneClicked)
+                        {
+                            comboBoxSelectProject.DataSource = projects;
+                            comboBoxSelectProject.ValueMember = "ProjectId";
+                            comboBoxSelectProject.DisplayMember = "ProjectName";
+                        }
+
+
+                        if (LoginTwoClicked)
+                        {
+                            comboBoxSelectProjectEnd.DataSource = projects;
+                            comboBoxSelectProjectEnd.ValueMember = "ProjectId";
+                            comboBoxSelectProjectEnd.DisplayMember = "ProjectName";
+                        }
+
+
+                        tfsInfo1.Visible = false;
+                        LoginOneClicked = false;
+                        LoginTwoClicked = false;
+
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Please fill project data!", "Message");
+
+                    }
+
+
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString(), "Message");
+            }
+
+
+
+        }
+
+
+
+
+
         private void btnDestinationLogin_Click(object sender, EventArgs e)
         {
             LoginOneClicked = false;
@@ -199,6 +304,12 @@ namespace PMToolMapper
             if (drpDestination.Text == "Jira")
             {
                 jiraInfo1.Visible = true;
+
+            }
+            else if (drpDestination.Text == "TFS")
+            {
+
+                tfsInfo1.Visible = true;
 
             }
         }
@@ -230,5 +341,25 @@ namespace PMToolMapper
         public string style { get; set; }
         public bool isPrivate { get; set; }
         public JiraProperties properties { get; set; }
+    }
+
+
+
+    //TFS classes
+    public class TFSValue
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string url { get; set; }
+        public string state { get; set; }
+        public int revision { get; set; }
+        public string visibility { get; set; }
+        public DateTime lastUpdateTime { get; set; }
+    }
+
+    public class TFSRoot
+    {
+        public int count { get; set; }
+        public List<TFSValue> value { get; set; }
     }
 }

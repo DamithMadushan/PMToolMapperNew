@@ -47,10 +47,11 @@
             this.lblSelectProject = new System.Windows.Forms.Label();
             this.comboBoxSelectProjectEnd = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.jiraInfo1 = new PMToolMapper.JiraInfo();
             this.btnMigrate = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnDestinationLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnCurrentLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
-            this.jiraInfo1 = new PMToolMapper.JiraInfo();
+            this.tfsInfo1 = new PMToolMapper.TFSInfo();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -256,6 +257,15 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Select Project";
             // 
+            // jiraInfo1
+            // 
+            this.jiraInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.jiraInfo1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.jiraInfo1.Location = new System.Drawing.Point(372, 138);
+            this.jiraInfo1.Name = "jiraInfo1";
+            this.jiraInfo1.Size = new System.Drawing.Size(573, 288);
+            this.jiraInfo1.TabIndex = 38;
+            // 
             // btnMigrate
             // 
             this.btnMigrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -298,20 +308,20 @@
             this.btnCurrentLogin.UseVisualStyleBackColor = false;
             this.btnCurrentLogin.Click += new System.EventHandler(this.btnCurrentLogin_Click);
             // 
-            // jiraInfo1
+            // tfsInfo1
             // 
-            this.jiraInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.jiraInfo1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.jiraInfo1.Location = new System.Drawing.Point(372, 138);
-            this.jiraInfo1.Name = "jiraInfo1";
-            this.jiraInfo1.Size = new System.Drawing.Size(573, 288);
-            this.jiraInfo1.TabIndex = 38;
+            this.tfsInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tfsInfo1.Location = new System.Drawing.Point(372, 141);
+            this.tfsInfo1.Name = "tfsInfo1";
+            this.tfsInfo1.Size = new System.Drawing.Size(573, 285);
+            this.tfsInfo1.TabIndex = 39;
             // 
             // ToolMigration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.tfsInfo1);
             this.Controls.Add(this.jiraInfo1);
             this.Controls.Add(this.comboBoxSelectProjectEnd);
             this.Controls.Add(this.label1);
@@ -369,5 +379,6 @@
         private System.Windows.Forms.ComboBox comboBoxSelectProjectEnd;
         private System.Windows.Forms.Label label1;
         private JiraInfo jiraInfo1;
+        private TFSInfo tfsInfo1;
     }
 }

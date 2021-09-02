@@ -16,7 +16,7 @@ namespace PMToolMapper
         [Browsable(true)]
         [Category("Action")]
         [Description("Invoked when user clicks button")]
-        public event EventHandler OkButtonClick;
+        public event EventHandler OkButtonClickJira;
 
         public JiraInfo()
         {
@@ -31,7 +31,7 @@ namespace PMToolMapper
                 JiraInfoModel.Email = textBoxEmail.Text;
                 JiraInfoModel.Token = textBoxToken.Text;
 
-                OkButtonClick(this, e);
+                OkButtonClickJira(this, e);
             }
 
 
@@ -40,6 +40,46 @@ namespace PMToolMapper
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+        }
+
+        private void lblpm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxUrl_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxToken_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -133,6 +133,12 @@
     <Compile Include="Resources\Custom Designs\RoundTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TFSInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TFSInfo.Designer.cs">
+      <DependentUpon>TFSInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TFSInfo.resx">
+      <DependentUpon>TFSInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolMapping.resx">
       <DependentUpon>ToolMapping.cs</DependentUpon>
     </EmbeddedResource>

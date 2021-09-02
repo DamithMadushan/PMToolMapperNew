@@ -51,6 +51,7 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(574, 48);
             this.pnlTop.TabIndex = 39;
+            this.pnlTop.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlTop_Paint);
             // 
             // lblpm
             // 
@@ -64,6 +65,7 @@
             this.lblpm.TabIndex = 0;
             this.lblpm.Text = "Project Info";
             this.lblpm.UseMnemonic = false;
+            this.lblpm.Click += new System.EventHandler(this.lblpm_Click);
             // 
             // OKButton
             // 
@@ -100,6 +102,7 @@
             this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 41;
             this.label1.Text = "CloudId";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -110,6 +113,7 @@
             this.label2.Size = new System.Drawing.Size(47, 17);
             this.label2.TabIndex = 42;
             this.label2.Text = "Email";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -120,6 +124,7 @@
             this.label3.Size = new System.Drawing.Size(53, 17);
             this.label3.TabIndex = 43;
             this.label3.Text = "Token";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBoxUrl
             // 
@@ -128,6 +133,7 @@
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(419, 23);
             this.textBoxUrl.TabIndex = 44;
+            this.textBoxUrl.TextChanged += new System.EventHandler(this.textBoxUrl_TextChanged);
             // 
             // textBoxEmail
             // 
@@ -136,6 +142,7 @@
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(419, 23);
             this.textBoxEmail.TabIndex = 45;
+            this.textBoxEmail.TextChanged += new System.EventHandler(this.textBoxEmail_TextChanged);
             // 
             // textBoxToken
             // 
@@ -144,12 +151,13 @@
             this.textBoxToken.Name = "textBoxToken";
             this.textBoxToken.Size = new System.Drawing.Size(419, 23);
             this.textBoxToken.TabIndex = 46;
+            this.textBoxToken.TextChanged += new System.EventHandler(this.textBoxToken_TextChanged);
             // 
             // JiraInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.Controls.Add(this.textBoxToken);
             this.Controls.Add(this.textBoxEmail);
             this.Controls.Add(this.textBoxUrl);

@@ -50,6 +50,7 @@
     <Compile Include="Models\ProjectDropdown.cs" />
     <Compile Include="Models\SharedDataModel.cs" />
     <Compile Include="Models\PMtoolModel.cs" />
+    <Compile Include="Models\TFSInfoModel.cs" />
     <Compile Include="Models\ToolFeatureCategoriesModel.cs" />
     <Compile Include="Models\ToolFeaturesModel.cs" />
     <Compile Include="Models\ToolMapperResultDetails.cs" />
