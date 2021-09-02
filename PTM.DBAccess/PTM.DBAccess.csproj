@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="DBModel\ToolMappingDataAccess.cs" />
     <Compile Include="DBModel\ToolMappingResultsReportDBAccess.cs" />
+    <Compile Include="DBModel\ToolMigrationResultsReportDBAccess.cs" />
     <Compile Include="DBModel\ToolMigrationServiceDBAccess.cs" />
     <Compile Include="DBModel\UserDBAccess.cs" />
     <Compile Include="DBModel\UserLogin.cs">

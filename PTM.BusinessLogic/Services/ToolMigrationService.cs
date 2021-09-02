@@ -11,11 +11,22 @@ namespace PTM.BusinessLogic.Services
 {
     public static class ToolMigrationService
     {
+
+
         public static List<PMtoolModel> getToolMappingDrp()
         {
 
             return ToolMigrationServiceDBAccess.getToolDropdown();
 
         }
+
+        public static long insertMappingID()
+        {
+             string fromName = MigrationTempData.fromToolName;
+             string toName = MigrationTempData.toToolName;
+
+            return ToolMigrationServiceDBAccess.insertMigration(fromName,toName);
+        }
+
     }
 }

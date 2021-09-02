@@ -47,11 +47,13 @@
   <ItemGroup>
     <Compile Include="ApiUrl.cs" />
     <Compile Include="MappingTempData.cs" />
+    <Compile Include="MigrationTempData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiData.cs" />
     <Compile Include="Services\CommonDataService.cs" />
     <Compile Include="Services\ToolMappingReportService.cs" />
     <Compile Include="Services\ToolMappingService.cs" />
+    <Compile Include="Services\ToolMigrationReportService.cs" />
     <Compile Include="Services\ToolMigrationService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

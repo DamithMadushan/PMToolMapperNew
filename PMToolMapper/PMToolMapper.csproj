@@ -116,6 +116,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MappingResultDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MigrationReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MigrationReportDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="PMToolMapping.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,11 +162,17 @@
     <Compile Include="ToolMigration.Designer.cs">
       <DependentUpon>ToolMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolMigrationHistory.cs">
+    <Compile Include="ToolMigrationHistoryReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolMigrationHistory.Designer.cs">
-      <DependentUpon>ToolMigrationHistory.cs</DependentUpon>
+    <Compile Include="ToolMigrationHistoryReport.Designer.cs">
+      <DependentUpon>ToolMigrationHistoryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolMigtationCrystalReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolMigtationCrystalReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="TooMappingResultReport.cs">
       <SubType>Form</SubType>
@@ -222,8 +233,12 @@
     <EmbeddedResource Include="ToolMigration.resx">
       <DependentUpon>ToolMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolMigrationHistory.resx">
-      <DependentUpon>ToolMigrationHistory.cs</DependentUpon>
+    <EmbeddedResource Include="ToolMigrationHistoryReport.resx">
+      <DependentUpon>ToolMigrationHistoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolMigtationCrystalReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ToolMigtationCrystalReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="TooMappingResultReport.resx">
       <DependentUpon>TooMappingResultReport.cs</DependentUpon>
@@ -247,6 +262,17 @@
     </None>
     <None Include="MappingResultDataSet.xss">
       <DependentUpon>MappingResultDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MigrationReportDataSet.xsc">
+      <DependentUpon>MigrationReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MigrationReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MigrationReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MigrationReportDataSet.xss">
+      <DependentUpon>MigrationReportDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

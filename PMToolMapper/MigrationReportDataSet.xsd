@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MigrationReportDataSet" targetNamespace="http://tempuri.org/MigrationReportDataSet.xsd" xmlns:mstns="http://tempuri.org/MigrationReportDataSet.xsd" xmlns="http://tempuri.org/MigrationReportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MigrationReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="MigrationReportDataSet" msprop:Generator_UserDSName="MigrationReportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MigrationData" msprop:Generator_TableClassName="MigrationDataDataTable" msprop:Generator_TableVarName="tableMigrationData" msprop:Generator_RowChangedName="MigrationDataRowChanged" msprop:Generator_TablePropName="MigrationData" msprop:Generator_RowDeletingName="MigrationDataRowDeleting" msprop:Generator_RowChangingName="MigrationDataRowChanging" msprop:Generator_RowEvHandlerName="MigrationDataRowChangeEventHandler" msprop:Generator_RowDeletedName="MigrationDataRowDeleted" msprop:Generator_RowClassName="MigrationDataRow" msprop:Generator_UserTableName="MigrationData" msprop:Generator_RowEvArgName="MigrationDataRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FromTool" msprop:Generator_ColumnVarNameInTable="columnFromTool" msprop:Generator_ColumnPropNameInRow="FromTool" msprop:Generator_ColumnPropNameInTable="FromToolColumn" msprop:Generator_UserColumnName="FromTool" type="xs:string" minOccurs="0" />
+              <xs:element name="ToTool" msprop:Generator_ColumnVarNameInTable="columnToTool" msprop:Generator_ColumnPropNameInRow="ToTool" msprop:Generator_ColumnPropNameInTable="ToToolColumn" msprop:Generator_UserColumnName="ToTool" type="xs:string" minOccurs="0" />
+              <xs:element name="MigrationDate" msprop:Generator_ColumnVarNameInTable="columnMigrationDate" msprop:Generator_ColumnPropNameInRow="MigrationDate" msprop:Generator_ColumnPropNameInTable="MigrationDateColumn" msprop:Generator_UserColumnName="MigrationDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MigratedBy" msprop:Generator_ColumnVarNameInTable="columnMigratedBy" msprop:Generator_ColumnPropNameInRow="MigratedBy" msprop:Generator_ColumnPropNameInTable="MigratedByColumn" msprop:Generator_UserColumnName="MigratedBy" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

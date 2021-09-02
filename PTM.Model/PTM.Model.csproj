@@ -56,6 +56,7 @@
     <Compile Include="Models\ToolMapperResultDetails.cs" />
     <Compile Include="Models\ToolMappingDataModel.cs" />
     <Compile Include="Models\ToolMappingResultHeader.cs" />
+    <Compile Include="Models\ToolMigrationDetails.cs" />
     <Compile Include="Models\UserDataModel.cs" />
     <Compile Include="Models\UserManegeModel.cs" />
     <Compile Include="Models\UserModel.cs" />

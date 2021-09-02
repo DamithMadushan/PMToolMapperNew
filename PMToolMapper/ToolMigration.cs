@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PTM.BusinessLogic;
 using PTM.BusinessLogic.Services;
 using PTM.Model.Models;
 using RestSharp;
@@ -29,6 +30,7 @@ namespace PMToolMapper
 
             jiraInfo1.Visible = false;
             tfsInfo1.Visible = false;
+            lblMigrationProgress.Visible = false;
 
             loadDropDowns();
 
@@ -313,6 +315,50 @@ namespace PMToolMapper
 
             }
         }
+
+        private void btnMigrate_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You sure You want to migrate selected tools?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+
+
+                lblMigrationProgress.Visible = true;
+
+                setDelay().Wait();
+
+
+                MigrationTempData.fromToolName = drpCurrent.Text;
+                MigrationTempData.toToolName = drpDestination.Text;
+
+                long mappingId = ToolMigrationService.insertMappingID();
+
+
+                /////////////////
+
+
+                Thread.Sleep(3000);
+                ///Migratiopn Logic///
+
+
+
+
+                //////////////////////
+
+
+                lblMigrationProgress.Visible = false;
+
+                this.Hide();
+                ToolMigrationHistoryReport toolMigrationHistoryReport = new ToolMigrationHistoryReport(1);
+                toolMigrationHistoryReport.ShowDialog();
+
+            }
+        }
+
+        private async Task setDelay()
+        {
+            await Task.Delay(2000).ConfigureAwait(false);
+        }
+
     }
 
 

@@ -47,11 +47,12 @@
             this.lblSelectProject = new System.Windows.Forms.Label();
             this.comboBoxSelectProjectEnd = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblMigrationProgress = new System.Windows.Forms.Label();
+            this.tfsInfo1 = new PMToolMapper.TFSInfo();
             this.jiraInfo1 = new PMToolMapper.JiraInfo();
             this.btnMigrate = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnDestinationLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnCurrentLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
-            this.tfsInfo1 = new PMToolMapper.TFSInfo();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -257,6 +258,28 @@
             this.label1.TabIndex = 36;
             this.label1.Text = "Select Project";
             // 
+            // lblMigrationProgress
+            // 
+            this.lblMigrationProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMigrationProgress.AutoSize = true;
+            this.lblMigrationProgress.BackColor = System.Drawing.SystemColors.Info;
+            this.lblMigrationProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMigrationProgress.Location = new System.Drawing.Point(662, 303);
+            this.lblMigrationProgress.Name = "lblMigrationProgress";
+            this.lblMigrationProgress.Size = new System.Drawing.Size(216, 20);
+            this.lblMigrationProgress.TabIndex = 40;
+            this.lblMigrationProgress.Text = "Tool Migration in progress";
+            // 
+            // tfsInfo1
+            // 
+            this.tfsInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tfsInfo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.tfsInfo1.Location = new System.Drawing.Point(372, 141);
+            this.tfsInfo1.Name = "tfsInfo1";
+            this.tfsInfo1.Size = new System.Drawing.Size(573, 285);
+            this.tfsInfo1.TabIndex = 39;
+            // 
             // jiraInfo1
             // 
             this.jiraInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -279,6 +302,7 @@
             this.btnMigrate.TabIndex = 33;
             this.btnMigrate.Text = "Migrate";
             this.btnMigrate.UseVisualStyleBackColor = false;
+            this.btnMigrate.Click += new System.EventHandler(this.btnMigrate_Click);
             // 
             // btnDestinationLogin
             // 
@@ -308,19 +332,12 @@
             this.btnCurrentLogin.UseVisualStyleBackColor = false;
             this.btnCurrentLogin.Click += new System.EventHandler(this.btnCurrentLogin_Click);
             // 
-            // tfsInfo1
-            // 
-            this.tfsInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tfsInfo1.Location = new System.Drawing.Point(372, 141);
-            this.tfsInfo1.Name = "tfsInfo1";
-            this.tfsInfo1.Size = new System.Drawing.Size(573, 285);
-            this.tfsInfo1.TabIndex = 39;
-            // 
             // ToolMigration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.lblMigrationProgress);
             this.Controls.Add(this.tfsInfo1);
             this.Controls.Add(this.jiraInfo1);
             this.Controls.Add(this.comboBoxSelectProjectEnd);
@@ -380,5 +397,6 @@
         private System.Windows.Forms.Label label1;
         private JiraInfo jiraInfo1;
         private TFSInfo tfsInfo1;
+        private System.Windows.Forms.Label lblMigrationProgress;
     }
 }

@@ -67,7 +67,7 @@ namespace PMToolMapper
         {
             this.Hide();
 
-            ToolMigrationHistory toolMigrationHistory = new ToolMigrationHistory();
+            ToolMigrationHistoryReport toolMigrationHistory = new ToolMigrationHistoryReport(2);
             toolMigrationHistory.ShowDialog();
         }
 

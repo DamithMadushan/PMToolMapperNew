@@ -37,7 +37,7 @@
           <Key>
             <PropertyRef Name="MigrationId" />
           </Key>
-          <Property Name="MigrationId" Type="integer" Nullable="false" />
+          <Property Name="MigrationId" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OldToolId" Type="integer" />
           <Property Name="NewToolId" Type="integer" />
           <Property Name="UserId" Type="integer" />
