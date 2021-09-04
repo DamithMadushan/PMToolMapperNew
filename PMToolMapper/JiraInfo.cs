@@ -27,7 +27,7 @@ namespace PMToolMapper
         {
             if(!string.IsNullOrEmpty(textBoxUrl.Text) && !string.IsNullOrEmpty(textBoxEmail.Text) && !string.IsNullOrEmpty(textBoxToken.Text))
             {
-                JiraInfoModel.Url = textBoxUrl.Text;
+                JiraInfoModel.CloudId = textBoxUrl.Text;
                 JiraInfoModel.Email = textBoxEmail.Text;
                 JiraInfoModel.Token = textBoxToken.Text;
 

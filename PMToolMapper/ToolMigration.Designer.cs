@@ -265,7 +265,7 @@
             this.lblMigrationProgress.AutoSize = true;
             this.lblMigrationProgress.BackColor = System.Drawing.SystemColors.Info;
             this.lblMigrationProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMigrationProgress.Location = new System.Drawing.Point(662, 303);
+            this.lblMigrationProgress.Location = new System.Drawing.Point(713, 303);
             this.lblMigrationProgress.Name = "lblMigrationProgress";
             this.lblMigrationProgress.Size = new System.Drawing.Size(216, 20);
             this.lblMigrationProgress.TabIndex = 40;

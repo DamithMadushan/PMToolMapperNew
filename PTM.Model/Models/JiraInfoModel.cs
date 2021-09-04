@@ -8,7 +8,7 @@ namespace PTM.Model.Models
 {
     public static class JiraInfoModel
     {
-        public static string Url = "";
+        public static string CloudId = "";
         public static string Email = "";
         public static string Token = "";
     }
