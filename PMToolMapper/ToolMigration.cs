@@ -3,6 +3,7 @@ using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
+using Nancy.Json;
 using Newtonsoft.Json;
 using PTM.BusinessLogic;
 using PTM.BusinessLogic.Services;
@@ -114,87 +115,94 @@ namespace PMToolMapper
         }
 
 
-        private void fromProjectsJiraIssues()
+        private void TFSIssuesCreate()
         {
 
             try
             {
 
-
-                if (!string.IsNullOrEmpty(JiraInfoModel.CloudId) && !string.IsNullOrEmpty(JiraInfoModel.CloudId) && !string.IsNullOrEmpty(JiraInfoModel.CloudId))
+                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
                 {
 
-                    string selectedProject = comboBoxSelectProject.Text.ToString();
 
-                    string url = "https://api.atlassian.com/ex/jira/" + JiraInfoModel.CloudId + "/rest/api/3/search?jql=project%20%3D%20" + selectedProject + "&fields=names,summary,description,issuetype";
-                    var response = GetResponseProjectsJira(url);
-
-                    dynamic res = JsonConvert.DeserializeObject<IssueRootJira>(response.Content);
-
-
-
-                    foreach (IssueJira issueData in res.issues)
+                    if (!string.IsNullOrEmpty(JiraInfoModel.CloudId) && !string.IsNullOrEmpty(JiraInfoModel.CloudId) && !string.IsNullOrEmpty(JiraInfoModel.CloudId))
                     {
-                        string issueName = "";
-                        string description = "";
-                        string issuetype = "";
 
-                        issueName = issueData.fields.summary;
+                        string selectedProject = comboBoxSelectProject.Text.ToString();
 
-                        issuetype = issueData.fields.issuetype.name;
+                        string url = "https://api.atlassian.com/ex/jira/" + JiraInfoModel.CloudId + "/rest/api/3/search?jql=project%20%3D%20" + selectedProject + "&fields=names,summary,description,issuetype";
+                        var response = GetResponseProjectsJira(url);
 
-                        if (issueData.fields.description.content != null)
+                        dynamic res = JsonConvert.DeserializeObject<IssueRootJira>(response.Content);
+
+
+
+                        foreach (IssueJira issueData in res.issues)
                         {
+                            string issueName = "";
+                            string description = "";
+                            string issuetype = "";
 
-                            foreach (IssueContentJira issueContentJira in issueData.fields.description.content)
+                            issueName = issueData.fields.summary;
+
+                            issuetype = issueData.fields.issuetype.name;
+
+                            if (issueData.fields.description.content != null)
                             {
 
-                                if (issueContentJira.contentinside != null)
+                                foreach (IssueContentJira issueContentJira in issueData.fields.description.content)
                                 {
 
-                                    foreach (IssueContentinsideJira issueContentinsideJira in issueContentJira.contentinside)
+                                    if (issueContentJira.contentinside != null)
                                     {
 
-                                        description = issueContentinsideJira.text;
+                                        foreach (IssueContentinsideJira issueContentinsideJira in issueContentJira.contentinside)
+                                        {
+
+                                            description = issueContentinsideJira.text;
 
 
+                                        }
                                     }
+
                                 }
-
                             }
-                        }
 
-                        if (issuetype == "Task" || issuetype == "Bug")
-                        {
-                            if (!string.IsNullOrEmpty(TFSInfoModel.Organization) && !string.IsNullOrEmpty(TFSInfoModel.Token))
+                            if (issuetype == "Task" || issuetype == "Bug")
                             {
-                                string project = comboBoxSelectProjectEnd.Text;
-                                string token = TFSInfoModel.Token;
-                                string org = TFSInfoModel.Organization;
-                                string _url = "https://dev.azure.com/" + org;
-
-                                if (issuetype == "Bug")
+                                if (!string.IsNullOrEmpty(TFSInfoModel.Organization) && !string.IsNullOrEmpty(TFSInfoModel.Token))
                                 {
-                                    issuetype = "Issue";
+                                    string project = comboBoxSelectProjectEnd.Text;
+                                    string token = TFSInfoModel.Token;
+                                    string org = TFSInfoModel.Organization;
+                                    string _url = "https://dev.azure.com/" + org;
+
+                                    if (issuetype == "Bug")
+                                    {
+                                        issuetype = "Issue";
+                                    }
+
+                                    CreateBugUsingClientLib(_url, token, project, issueName, issuetype, description);
                                 }
 
-                                CreateBugUsingClientLib(_url, token, project, issueName, issuetype, description);
                             }
 
+
+
+
+
                         }
-
-
 
 
 
                     }
 
 
-
                 }
-
-
-
+                else
+                {
+                    MessageBox.Show("Please select a project!");
+                }
 
             }
             catch (Exception ex)
@@ -303,7 +311,7 @@ namespace PMToolMapper
                         ProjectDropdown projectDropdown = new ProjectDropdown()
                         {
 
-                            ProjectId = projectData.id,
+                            ProjectId = projectData.key,
                             ProjectName = projectData.name
 
                         };
@@ -383,6 +391,19 @@ namespace PMToolMapper
 
         }
 
+
+
+        public IRestResponse GetResponseWorkItemsTFS(string url, string personalAccessToken, Method method = Method.POST)
+        {
+
+            string encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(string.Format("{0}:{1}", "", personalAccessToken)));
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("Authorization", $"Basic {encoded}");
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
 
 
         private void getProjectsTFS(object sender, EventArgs e)
@@ -502,7 +523,7 @@ namespace PMToolMapper
                     MigrationTempData.fromToolName = drpCurrent.Text;
                     MigrationTempData.toToolName = drpDestination.Text;
 
-                    long mappingId = ToolMigrationService.insertMappingID(comboBoxSelectProject.Text,comboBoxSelectProjectEnd.Text);
+                    long mappingId = ToolMigrationService.insertMappingID(comboBoxSelectProject.Text, comboBoxSelectProjectEnd.Text);
 
 
                     /////////////////
@@ -510,7 +531,12 @@ namespace PMToolMapper
 
                     if (drpCurrent.Text == "Jira" && drpDestination.Text == "TFS")
                     {
-                        fromProjectsJiraIssues();
+                        TFSIssuesCreate();
+
+                    }
+                    else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
+                    {
+                        JiraIssuesCreate();
                     }
 
 
@@ -545,7 +571,131 @@ namespace PMToolMapper
             await Task.Delay(2000).ConfigureAwait(false);
         }
 
+
+
+        private void JiraIssuesCreate()
+        {
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
+                {
+
+                    string token = TFSInfoModel.Token;
+                    string org = TFSInfoModel.Organization;
+                    Uri url = new Uri("https://dev.azure.com/" + org);
+                    string project = comboBoxSelectProject.Text;
+
+
+                    VssBasicCredential credentials = new VssBasicCredential("", token);
+
+                    Wiql wiql = new Wiql()
+                    {
+                        Query = "Select [State], [Title],[Remaining Work] From WorkItems Where [Work Item Type] = 'Issue' OR [Work Item Type] = 'Task' And [System.TeamProject] = '" + project + "'"
+                    };
+
+                    //create instance of work item tracking http client
+                    using (WorkItemTrackingHttpClient workItemTrackingHttpClient = new WorkItemTrackingHttpClient(url, credentials))
+                    {
+                        //execute the query to get the list of work items in the results
+                        WorkItemQueryResult workItemQueryResult = workItemTrackingHttpClient.QueryByWiqlAsync(wiql).Result;
+
+                        //some error handling                
+                        if (workItemQueryResult.WorkItems.Count() != 0)
+                        {
+                            foreach (IEnumerable<WorkItemReference> batch in workItemQueryResult.WorkItems.Batch(100))
+                            {
+                                var workItemIds = batch.Select(p => p.Id).ToArray();
+                                var workItems = workItemTrackingHttpClient.GetWorkItemsAsync(workItemIds, expand: WorkItemExpand.All).Result;
+
+                                foreach (var workItem in workItems)
+                                {
+                                    string taskType = "";
+                                    string taskName = "";
+
+                                    foreach (var field in workItem.Fields)
+                                    {
+                                        if (field.Key == "System.WorkItemType")
+                                        {
+                                            taskType = field.Value.ToString();
+
+                                        }
+                                        else if (field.Key == "System.Title")
+                                        {
+                                            taskName = field.Value.ToString();
+                                        }
+
+                                    }
+
+
+                                    CreateJiraIssue(taskName, taskType);
+
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a project!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+
+
+
+        public IRestResponse CreateJiraIssue(string taskname, string issueType, Method method = Method.POST)
+        {
+            string email = JiraInfoModel.Email;
+            string token = JiraInfoModel.Token;
+
+            string project = comboBoxSelectProjectEnd.Text;
+            string projectid = comboBoxSelectProjectEnd.SelectedValue.ToString();
+
+
+            string url = "https://api.atlassian.com/ex/jira/" + JiraInfoModel.CloudId + "/rest/api/3/issue";
+
+            if (issueType == "Issue")
+            {
+                issueType = "Bug";
+            }
+
+
+
+            string data = @"{""fields"": {""project"":{""key"": """ + projectid + @"""},""summary"": """ + taskname + @""",""issuetype"": {""name"": """ + issueType + @"""}}}";
+
+            //dynamic json = JsonConvert.DeserializeObject(data);
+
+            string encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes($"{email}:{token}"));
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("Authorization", $"Basic {encoded}");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(data);
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
+
+
+
+
     }
+
+
+
 
     //Jira project classes
     public class JiraAvatarUrls
@@ -636,6 +786,31 @@ namespace PMToolMapper
         public List<IssueJira> issues { get; set; }
     }
 
+
+
+    ///Jira Issue Create
+    ///
+    public class JiraProject
+    {
+        public string key { get; set; }
+    }
+
+    public class JiraIssuetype
+    {
+        public string name { get; set; }
+    }
+
+    public class JiraIssueFields
+    {
+        public JiraProject project { get; set; }
+        public string summary { get; set; }
+        public JiraIssuetype issuetype { get; set; }
+    }
+
+    public class JiraIssueRoot
+    {
+        public JiraIssueFields fields { get; set; }
+    }
 
 
 
