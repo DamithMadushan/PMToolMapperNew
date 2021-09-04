@@ -44,7 +44,7 @@ namespace PTM.DBAccess.DBModel
 
         }
 
-        public static long insertMigration(string fromName, string toName)
+        public static long insertMigration(string fromName, string toName,string fromProject, string toProject)
         {
             try
             {
@@ -62,7 +62,9 @@ namespace PTM.DBAccess.DBModel
                         OldToolId = frmId,
                         NewToolId = toId,
                         UserId = UserDataModel.UserId,
-                        Date = DateTime.Now.ToString()
+                        Date = DateTime.Now.ToString(),
+                        FromProject = fromProject,
+                        ToProject = toProject
 
 
                     };

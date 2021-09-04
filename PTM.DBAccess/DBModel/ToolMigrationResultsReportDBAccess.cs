@@ -72,7 +72,8 @@ namespace PTM.DBAccess.DBModel
                                   select new
                                   {
                                       mh.MigrationId,
-                                      mh.MigrationPercentage,
+                                      mh.FromProject,
+                                      mh.ToProject,
                                       mh.Date,
                                       mh.NewToolId,
                                       mh.OldToolId,
@@ -89,7 +90,9 @@ namespace PTM.DBAccess.DBModel
                         Date = result.Date,
                         FromTool = fromTool.ToolName,
                         ToTool = toTool.ToolName,
-                        User = result.UserFullName
+                        User = result.UserFullName,
+                        MigratedFrom = result.FromProject,
+                        MigratedTo = result.ToProject
 
 
                     };
@@ -125,7 +128,8 @@ namespace PTM.DBAccess.DBModel
                                   select new
                                   {
                                       mh.MigrationId,
-                                      mh.MigrationPercentage,
+                                      mh.FromProject,
+                                      mh.ToProject,
                                       mh.Date,
                                       mh.NewToolId,
                                       mh.OldToolId,
@@ -142,7 +146,9 @@ namespace PTM.DBAccess.DBModel
                         Date = result.Date,
                         FromTool = fromTool.ToolName,
                         ToTool = toTool.ToolName,
-                        User = result.UserFullName
+                        User = result.UserFullName,
+                        MigratedFrom = result.FromProject,
+                        MigratedTo = result.ToProject
 
 
                     };

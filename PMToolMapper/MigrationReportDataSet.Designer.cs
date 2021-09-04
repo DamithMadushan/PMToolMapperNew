@@ -287,6 +287,10 @@ namespace PMToolMapper {
             
             private global::System.Data.DataColumn columnMigratedBy;
             
+            private global::System.Data.DataColumn columnFromProject;
+            
+            private global::System.Data.DataColumn columnToProject;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public MigrationDataDataTable() {
@@ -354,6 +358,22 @@ namespace PMToolMapper {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn FromProjectColumn {
+                get {
+                    return this.columnFromProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ToProjectColumn {
+                get {
+                    return this.columnToProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +409,15 @@ namespace PMToolMapper {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public MigrationDataRow AddMigrationDataRow(string FromTool, string ToTool, string MigrationDate, string MigratedBy) {
+            public MigrationDataRow AddMigrationDataRow(string FromTool, string ToTool, string MigrationDate, string MigratedBy, string FromProject, string ToProject) {
                 MigrationDataRow rowMigrationDataRow = ((MigrationDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         FromTool,
                         ToTool,
                         MigrationDate,
-                        MigratedBy};
+                        MigratedBy,
+                        FromProject,
+                        ToProject};
                 rowMigrationDataRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMigrationDataRow);
                 return rowMigrationDataRow;
@@ -422,6 +444,8 @@ namespace PMToolMapper {
                 this.columnToTool = base.Columns["ToTool"];
                 this.columnMigrationDate = base.Columns["MigrationDate"];
                 this.columnMigratedBy = base.Columns["MigratedBy"];
+                this.columnFromProject = base.Columns["FromProject"];
+                this.columnToProject = base.Columns["ToProject"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,6 +459,10 @@ namespace PMToolMapper {
                 base.Columns.Add(this.columnMigrationDate);
                 this.columnMigratedBy = new global::System.Data.DataColumn("MigratedBy", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMigratedBy);
+                this.columnFromProject = new global::System.Data.DataColumn("FromProject", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFromProject);
+                this.columnToProject = new global::System.Data.DataColumn("ToProject", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnToProject);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +669,38 @@ namespace PMToolMapper {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string FromProject {
+                get {
+                    try {
+                        return ((string)(this[this.tableMigrationData.FromProjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FromProject\' in table \'MigrationData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMigrationData.FromProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string ToProject {
+                get {
+                    try {
+                        return ((string)(this[this.tableMigrationData.ToProjectColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ToProject\' in table \'MigrationData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMigrationData.ToProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsFromToolNull() {
                 return this.IsNull(this.tableMigrationData.FromToolColumn);
             }
@@ -685,6 +745,30 @@ namespace PMToolMapper {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetMigratedByNull() {
                 this[this.tableMigrationData.MigratedByColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsFromProjectNull() {
+                return this.IsNull(this.tableMigrationData.FromProjectColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetFromProjectNull() {
+                this[this.tableMigrationData.FromProjectColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsToProjectNull() {
+                return this.IsNull(this.tableMigrationData.ToProjectColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetToProjectNull() {
+                this[this.tableMigrationData.ToProjectColumn] = global::System.Convert.DBNull;
             }
         }
         

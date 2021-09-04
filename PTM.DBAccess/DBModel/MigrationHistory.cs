@@ -19,6 +19,11 @@ namespace PTM.DBAccess.DBModel
         public Nullable<long> NewToolId { get; set; }
         public Nullable<long> UserId { get; set; }
         public string Date { get; set; }
-        public string MigrationPercentage { get; set; }
+        public string FromProject { get; set; }
+        public string ToProject { get; set; }
+    
+        public virtual UserLogin UserLogin { get; set; }
+        public virtual PMTool PMTool { get; set; }
+        public virtual PMTool PMTool1 { get; set; }
     }
 }

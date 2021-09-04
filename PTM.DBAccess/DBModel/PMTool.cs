@@ -20,6 +20,8 @@ namespace PTM.DBAccess.DBModel
             this.ToolFeatures = new HashSet<ToolFeature>();
             this.MappingHistories = new HashSet<MappingHistory>();
             this.MappingHistories1 = new HashSet<MappingHistory>();
+            this.MigrationHistories = new HashSet<MigrationHistory>();
+            this.MigrationHistories1 = new HashSet<MigrationHistory>();
         }
     
         public long ToolId { get; set; }
@@ -31,5 +33,9 @@ namespace PTM.DBAccess.DBModel
         public virtual ICollection<MappingHistory> MappingHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MappingHistory> MappingHistories1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MigrationHistory> MigrationHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MigrationHistory> MigrationHistories1 { get; set; }
     }
 }

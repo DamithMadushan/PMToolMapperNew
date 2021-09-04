@@ -18,6 +18,7 @@ namespace PTM.DBAccess.DBModel
         public UserLogin()
         {
             this.MappingHistories = new HashSet<MappingHistory>();
+            this.MigrationHistories = new HashSet<MigrationHistory>();
         }
     
         public long UserId { get; set; }
@@ -29,5 +30,7 @@ namespace PTM.DBAccess.DBModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MappingHistory> MappingHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MigrationHistory> MigrationHistories { get; set; }
     }
 }

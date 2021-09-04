@@ -20,12 +20,12 @@ namespace PTM.BusinessLogic.Services
 
         }
 
-        public static long insertMappingID()
+        public static long insertMappingID(string fromProject,string toProject)
         {
              string fromName = MigrationTempData.fromToolName;
              string toName = MigrationTempData.toToolName;
 
-            return ToolMigrationServiceDBAccess.insertMigration(fromName,toName);
+            return ToolMigrationServiceDBAccess.insertMigration(fromName,toName, fromProject, toProject);
         }
 
     }

@@ -502,7 +502,7 @@ namespace PMToolMapper
                     MigrationTempData.fromToolName = drpCurrent.Text;
                     MigrationTempData.toToolName = drpDestination.Text;
 
-                    long mappingId = ToolMigrationService.insertMappingID();
+                    long mappingId = ToolMigrationService.insertMappingID(comboBoxSelectProject.Text,comboBoxSelectProjectEnd.Text);
 
 
                     /////////////////

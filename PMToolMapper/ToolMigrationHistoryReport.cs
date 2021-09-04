@@ -119,6 +119,8 @@ namespace PMToolMapper
                 migrationRow["ToTool"] = migrationData.ToTool;
                 migrationRow["MigrationDate"] = migrationData.Date;
                 migrationRow["MigratedBy"] = migrationData.User;
+                migrationRow["FromProject"] = migrationData.MigratedFrom;
+                migrationRow["ToProject"] = migrationData.MigratedTo;
 
                 migrationDataTable.Rows.Add(migrationRow);
 
@@ -162,22 +164,24 @@ namespace PMToolMapper
                 //data table
                 DataTable migrationDataTable = migrationReportDataSet.MigrationData.Clone();
 
-         
+
                 //migration data
 
                 var migrationData = ToolMigrationReportService.gettoolMigrationResultDetailsCustom(selecttedReport);
 
-               
-                    DataRow migrationRow = migrationDataTable.NewRow();
 
-                    migrationRow["FromTool"] = migrationData.FromTool;
-                    migrationRow["ToTool"] = migrationData.ToTool;
-                    migrationRow["MigrationDate"] = migrationData.Date;
-                    migrationRow["MigratedBy"] = migrationData.User;
+                DataRow migrationRow = migrationDataTable.NewRow();
 
-                    migrationDataTable.Rows.Add(migrationRow);
+                migrationRow["FromTool"] = migrationData.FromTool;
+                migrationRow["ToTool"] = migrationData.ToTool;
+                migrationRow["MigrationDate"] = migrationData.Date;
+                migrationRow["MigratedBy"] = migrationData.User;
+                migrationRow["FromProject"] = migrationData.MigratedFrom;
+                migrationRow["ToProject"] = migrationData.MigratedTo;
 
-                
+                migrationDataTable.Rows.Add(migrationRow);
+
+
 
 
                 migrationReportDataSet.Tables.Add(migrationDataTable);

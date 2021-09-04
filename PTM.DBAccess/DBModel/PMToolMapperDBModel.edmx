@@ -42,7 +42,8 @@
           <Property Name="NewToolId" Type="integer" />
           <Property Name="UserId" Type="integer" />
           <Property Name="Date" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="MigrationPercentage" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="FromProject" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ToProject" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="PMTool">
           <Key>
@@ -141,6 +142,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MigrationHistory_0_0">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
+          <End Role="MigrationHistory" Type="Self.MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MigrationHistory_1_0">
+          <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
+          <End Role="MigrationHistory" Type="Self.MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="OldToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MigrationHistory_2_0">
+          <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
+          <End Role="MigrationHistory" Type="Self.MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="NewToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ToolFeatures_0_0">
           <End Role="PMTool" Type="Self.PMTool" Multiplicity="0..1" />
           <End Role="ToolFeatures" Type="Self.ToolFeatures" Multiplicity="*" />
@@ -206,6 +243,18 @@
             <End Role="AllFeatures" EntitySet="AllFeatures" />
             <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_MigrationHistory_0_0" Association="Self.FK_MigrationHistory_0_0">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MigrationHistory_1_0" Association="Self.FK_MigrationHistory_1_0">
+            <End Role="PMTool" EntitySet="PMTool" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MigrationHistory_2_0" Association="Self.FK_MigrationHistory_2_0">
+            <End Role="PMTool" EntitySet="PMTool" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistory" />
+          </AssociationSet>
           <AssociationSet Name="FK_ToolFeatures_0_0" Association="Self.FK_ToolFeatures_0_0">
             <End Role="PMTool" EntitySet="PMTool" />
             <End Role="ToolFeatures" EntitySet="ToolFeatures" />
@@ -244,17 +293,6 @@
           <NavigationProperty Name="AllFeature" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_0_0" FromRole="MappingHistoryDetail" ToRole="AllFeature" />
           <NavigationProperty Name="MappingHistory" Relationship="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0" FromRole="MappingHistoryDetail" ToRole="MappingHistory" />
         </EntityType>
-        <EntityType Name="MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-          </Key>
-          <Property Name="MigrationId" Type="Int64" Nullable="false" />
-          <Property Name="OldToolId" Type="Int64" />
-          <Property Name="NewToolId" Type="Int64" />
-          <Property Name="UserId" Type="Int64" />
-          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="MigrationPercentage" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="PMTool">
           <Key>
             <PropertyRef Name="ToolId" />
@@ -264,6 +302,8 @@
           <NavigationProperty Name="ToolFeatures" Relationship="PMToolMapperDBModel.FK_ToolFeatures_0_0" FromRole="PMTool" ToRole="ToolFeature" />
           <NavigationProperty Name="MappingHistories" Relationship="PMToolMapperDBModel.FK_MappingHistory_0_0" FromRole="PMTool" ToRole="MappingHistory" />
           <NavigationProperty Name="MappingHistories1" Relationship="PMToolMapperDBModel.FK_MappingHistory_2_0" FromRole="PMTool" ToRole="MappingHistory" />
+          <NavigationProperty Name="MigrationHistories" Relationship="PMToolMapperDBModel.FK_MigrationHistory_1_0" FromRole="PMTool" ToRole="MigrationHistory" />
+          <NavigationProperty Name="MigrationHistories1" Relationship="PMToolMapperDBModel.FK_MigrationHistory_2_0" FromRole="PMTool" ToRole="MigrationHistory" />
         </EntityType>
         <EntityType Name="ToolFeatureCategory">
           <Key>
@@ -284,11 +324,11 @@
           <Property Name="Role" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MappingHistories" Relationship="PMToolMapperDBModel.FK_MappingHistory_1_0" FromRole="UserLogin" ToRole="MappingHistory" />
+          <NavigationProperty Name="MigrationHistories" Relationship="PMToolMapperDBModel.FK_MigrationHistory_0_0" FromRole="UserLogin" ToRole="MigrationHistory" />
         </EntityType>
         <EntityContainer Name="PMToolMapperDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AllFeatures" EntityType="Self.AllFeature" />
           <EntitySet Name="MappingHistoryDetails" EntityType="Self.MappingHistoryDetail" />
-          <EntitySet Name="MigrationHistories" EntityType="Self.MigrationHistory" />
           <EntitySet Name="PMTools" EntityType="Self.PMTool" />
           <EntitySet Name="ToolFeatureCategories" EntityType="Self.ToolFeatureCategory" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
@@ -325,6 +365,19 @@
           <AssociationSet Name="FK_MappingHistoryDetail_1_0" Association="PMToolMapperDBModel.FK_MappingHistoryDetail_1_0">
             <End Role="MappingHistory" EntitySet="MappingHistories" />
             <End Role="MappingHistoryDetail" EntitySet="MappingHistoryDetails" />
+          </AssociationSet>
+          <EntitySet Name="MigrationHistories" EntityType="PMToolMapperDBModel.MigrationHistory" />
+          <AssociationSet Name="FK_MigrationHistory_0_0" Association="PMToolMapperDBModel.FK_MigrationHistory_0_0">
+            <End Role="UserLogin" EntitySet="UserLogins" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MigrationHistory_1_0" Association="PMToolMapperDBModel.FK_MigrationHistory_1_0">
+            <End Role="PMTool" EntitySet="PMTools" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MigrationHistory_2_0" Association="PMToolMapperDBModel.FK_MigrationHistory_2_0">
+            <End Role="PMTool" EntitySet="PMTools" />
+            <End Role="MigrationHistory" EntitySet="MigrationHistories" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ToolFeature">
@@ -453,6 +506,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OldToolId" Type="Int64" />
+          <Property Name="NewToolId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Date" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FromProject" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ToProject" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserLogin" Relationship="PMToolMapperDBModel.FK_MigrationHistory_0_0" FromRole="MigrationHistory" ToRole="UserLogin" />
+          <NavigationProperty Name="PMTool" Relationship="PMToolMapperDBModel.FK_MigrationHistory_1_0" FromRole="MigrationHistory" ToRole="PMTool" />
+          <NavigationProperty Name="PMTool1" Relationship="PMToolMapperDBModel.FK_MigrationHistory_2_0" FromRole="MigrationHistory" ToRole="PMTool" />
+        </EntityType>
+        <Association Name="FK_MigrationHistory_0_0">
+          <End Type="PMToolMapperDBModel.UserLogin" Role="UserLogin" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MigrationHistory" Role="MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MigrationHistory_1_0">
+          <End Type="PMToolMapperDBModel.PMTool" Role="PMTool" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MigrationHistory" Role="MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="OldToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MigrationHistory_2_0">
+          <End Type="PMToolMapperDBModel.PMTool" Role="PMTool" Multiplicity="0..1" />
+          <End Type="PMToolMapperDBModel.MigrationHistory" Role="MigrationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMTool">
+              <PropertyRef Name="ToolId" />
+            </Principal>
+            <Dependent Role="MigrationHistory">
+              <PropertyRef Name="NewToolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -475,18 +579,6 @@
                 <ScalarProperty Name="DetailId" ColumnName="DetailId" />
                 <ScalarProperty Name="MappingId" ColumnName="MappingId" />
                 <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MigrationHistories">
-            <EntityTypeMapping TypeName="PMToolMapperDBModel.MigrationHistory">
-              <MappingFragment StoreEntitySet="MigrationHistory">
-                <ScalarProperty Name="MigrationPercentage" ColumnName="MigrationPercentage" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="OldToolId" ColumnName="OldToolId" />
-                <ScalarProperty Name="NewToolId" ColumnName="NewToolId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -540,6 +632,19 @@
                 <ScalarProperty Name="NewToolId" ColumnName="NewToolId" />
                 <ScalarProperty Name="OldToolId" ColumnName="OldToolId" />
                 <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MigrationHistories">
+            <EntityTypeMapping TypeName="PMToolMapperDBModel.MigrationHistory">
+              <MappingFragment StoreEntitySet="MigrationHistory">
+                <ScalarProperty Name="ToProject" ColumnName="ToProject" />
+                <ScalarProperty Name="FromProject" ColumnName="FromProject" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NewToolId" ColumnName="NewToolId" />
+                <ScalarProperty Name="OldToolId" ColumnName="OldToolId" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

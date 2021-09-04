@@ -27,11 +27,11 @@ namespace PTM.DBAccess.DBModel
     
         public virtual DbSet<AllFeature> AllFeatures { get; set; }
         public virtual DbSet<MappingHistoryDetail> MappingHistoryDetails { get; set; }
-        public virtual DbSet<MigrationHistory> MigrationHistories { get; set; }
         public virtual DbSet<PMTool> PMTools { get; set; }
         public virtual DbSet<ToolFeatureCategory> ToolFeatureCategories { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<ToolFeature> ToolFeatures { get; set; }
         public virtual DbSet<MappingHistory> MappingHistories { get; set; }
+        public virtual DbSet<MigrationHistory> MigrationHistories { get; set; }
     }
 }
