@@ -115,6 +115,87 @@ namespace PMToolMapper
         }
 
 
+        private void JiraIssuesCreateFromTFS()
+        {
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
+                {
+
+                    string token = TFSInfoModel.Token;
+                    string org = TFSInfoModel.Organization;
+                    Uri url = new Uri("https://dev.azure.com/" + org);
+                    string project = comboBoxSelectProject.Text;
+
+
+                    VssBasicCredential credentials = new VssBasicCredential("", token);
+
+                    Wiql wiql = new Wiql()
+                    {
+                        Query = "Select [State], [Title],[Remaining Work] From WorkItems Where [Work Item Type] = 'Issue' OR [Work Item Type] = 'Task' And [System.TeamProject] = '" + project + "'"
+                    };
+
+                    //create instance of work item tracking http client
+                    using (WorkItemTrackingHttpClient workItemTrackingHttpClient = new WorkItemTrackingHttpClient(url, credentials))
+                    {
+                        //execute the query to get the list of work items in the results
+                        WorkItemQueryResult workItemQueryResult = workItemTrackingHttpClient.QueryByWiqlAsync(wiql).Result;
+
+                        //some error handling                
+                        if (workItemQueryResult.WorkItems.Count() != 0)
+                        {
+                            foreach (IEnumerable<WorkItemReference> batch in workItemQueryResult.WorkItems.Batch(100))
+                            {
+                                var workItemIds = batch.Select(p => p.Id).ToArray();
+                                var workItems = workItemTrackingHttpClient.GetWorkItemsAsync(workItemIds, expand: WorkItemExpand.All).Result;
+
+                                foreach (var workItem in workItems)
+                                {
+                                    string taskType = "";
+                                    string taskName = "";
+
+                                    foreach (var field in workItem.Fields)
+                                    {
+                                        if (field.Key == "System.WorkItemType")
+                                        {
+                                            taskType = field.Value.ToString();
+
+                                        }
+                                        else if (field.Key == "System.Title")
+                                        {
+                                            taskName = field.Value.ToString();
+                                        }
+
+                                    }
+
+
+                                    CreateJiraIssue(taskName, taskType);
+
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a project!");
+                }
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+
         private void TFSIssuesCreate()
         {
 
@@ -536,7 +617,7 @@ namespace PMToolMapper
                     }
                     else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
                     {
-                        JiraIssuesCreate();
+                        JiraIssuesCreateFromTFS();
                     }
 
 
@@ -573,87 +654,7 @@ namespace PMToolMapper
 
 
 
-        private void JiraIssuesCreate
-        {
-
-            try
-            {
-
-                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
-                {
-
-                    string token = TFSInfoModel.Token;
-                    string org = TFSInfoModel.Organization;
-                    Uri url = new Uri("https://dev.azure.com/" + org);
-                    string project = comboBoxSelectProject.Text;
-
-
-                    VssBasicCredential credentials = new VssBasicCredential("", token);
-
-                    Wiql wiql = new Wiql()
-                    {
-                        Query = "Select [State], [Title],[Remaining Work] From WorkItems Where [Work Item Type] = 'Issue' OR [Work Item Type] = 'Task' And [System.TeamProject] = '" + project + "'"
-                    };
-
-                    //create instance of work item tracking http client
-                    using (WorkItemTrackingHttpClient workItemTrackingHttpClient = new WorkItemTrackingHttpClient(url, credentials))
-                    {
-                        //execute the query to get the list of work items in the results
-                        WorkItemQueryResult workItemQueryResult = workItemTrackingHttpClient.QueryByWiqlAsync(wiql).Result;
-
-                        //some error handling                
-                        if (workItemQueryResult.WorkItems.Count() != 0)
-                        {
-                            foreach (IEnumerable<WorkItemReference> batch in workItemQueryResult.WorkItems.Batch(100))
-                            {
-                                var workItemIds = batch.Select(p => p.Id).ToArray();
-                                var workItems = workItemTrackingHttpClient.GetWorkItemsAsync(workItemIds, expand: WorkItemExpand.All).Result;
-
-                                foreach (var workItem in workItems)
-                                {
-                                    string taskType = "";
-                                    string taskName = "";
-
-                                    foreach (var field in workItem.Fields)
-                                    {
-                                        if (field.Key == "System.WorkItemType")
-                                        {
-                                            taskType = field.Value.ToString();
-
-                                        }
-                                        else if (field.Key == "System.Title")
-                                        {
-                                            taskName = field.Value.ToString();
-                                        }
-
-                                    }
-
-
-                                    CreateJiraIssue(taskName, taskType);
-
-                                }
-
-                            }
-                        }
-
-
-                    }
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Please select a project!");
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-
-        }
+   
 
 
 

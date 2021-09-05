@@ -36,10 +36,6 @@
             this.lblCurrentPlatform = new System.Windows.Forms.Label();
             this.drpCurrent = new System.Windows.Forms.ComboBox();
             this.lblLogin1 = new System.Windows.Forms.Label();
-            this.lblOptions = new System.Windows.Forms.Label();
-            this.chkBoxcommonBasic = new System.Windows.Forms.CheckBox();
-            this.chkBoxcommonAdvanced = new System.Windows.Forms.CheckBox();
-            this.chkBoxcommonExtra = new System.Windows.Forms.CheckBox();
             this.lblLogin2 = new System.Windows.Forms.Label();
             this.drpDestination = new System.Windows.Forms.ComboBox();
             this.lblDestination = new System.Windows.Forms.Label();
@@ -141,58 +137,18 @@
             // 
             this.lblLogin1.AutoSize = true;
             this.lblLogin1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogin1.Location = new System.Drawing.Point(12, 111);
+            this.lblLogin1.Location = new System.Drawing.Point(12, 158);
             this.lblLogin1.Name = "lblLogin1";
             this.lblLogin1.Size = new System.Drawing.Size(43, 17);
             this.lblLogin1.TabIndex = 18;
             this.lblLogin1.Text = "Login";
             this.lblLogin1.Click += new System.EventHandler(this.lblLogin1_Click);
             // 
-            // lblOptions
-            // 
-            this.lblOptions.AutoSize = true;
-            this.lblOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOptions.Location = new System.Drawing.Point(12, 222);
-            this.lblOptions.Name = "lblOptions";
-            this.lblOptions.Size = new System.Drawing.Size(100, 17);
-            this.lblOptions.TabIndex = 19;
-            this.lblOptions.Text = "Select Options";
-            // 
-            // chkBoxcommonBasic
-            // 
-            this.chkBoxcommonBasic.AutoSize = true;
-            this.chkBoxcommonBasic.Location = new System.Drawing.Point(273, 222);
-            this.chkBoxcommonBasic.Name = "chkBoxcommonBasic";
-            this.chkBoxcommonBasic.Size = new System.Drawing.Size(140, 17);
-            this.chkBoxcommonBasic.TabIndex = 20;
-            this.chkBoxcommonBasic.Text = "Common Basic Features";
-            this.chkBoxcommonBasic.UseVisualStyleBackColor = true;
-            // 
-            // chkBoxcommonAdvanced
-            // 
-            this.chkBoxcommonAdvanced.AutoSize = true;
-            this.chkBoxcommonAdvanced.Location = new System.Drawing.Point(273, 264);
-            this.chkBoxcommonAdvanced.Name = "chkBoxcommonAdvanced";
-            this.chkBoxcommonAdvanced.Size = new System.Drawing.Size(163, 17);
-            this.chkBoxcommonAdvanced.TabIndex = 21;
-            this.chkBoxcommonAdvanced.Text = "Common Advanced Features";
-            this.chkBoxcommonAdvanced.UseVisualStyleBackColor = true;
-            // 
-            // chkBoxcommonExtra
-            // 
-            this.chkBoxcommonExtra.AutoSize = true;
-            this.chkBoxcommonExtra.Location = new System.Drawing.Point(273, 303);
-            this.chkBoxcommonExtra.Name = "chkBoxcommonExtra";
-            this.chkBoxcommonExtra.Size = new System.Drawing.Size(94, 17);
-            this.chkBoxcommonExtra.TabIndex = 22;
-            this.chkBoxcommonExtra.Text = "Extra Features";
-            this.chkBoxcommonExtra.UseVisualStyleBackColor = true;
-            // 
             // lblLogin2
             // 
             this.lblLogin2.AutoSize = true;
             this.lblLogin2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogin2.Location = new System.Drawing.Point(12, 409);
+            this.lblLogin2.Location = new System.Drawing.Point(12, 420);
             this.lblLogin2.Name = "lblLogin2";
             this.lblLogin2.Size = new System.Drawing.Size(43, 17);
             this.lblLogin2.TabIndex = 32;
@@ -203,7 +159,7 @@
             this.drpDestination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.drpDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.drpDestination.FormattingEnabled = true;
-            this.drpDestination.Location = new System.Drawing.Point(273, 354);
+            this.drpDestination.Location = new System.Drawing.Point(273, 326);
             this.drpDestination.Name = "drpDestination";
             this.drpDestination.Size = new System.Drawing.Size(274, 24);
             this.drpDestination.TabIndex = 30;
@@ -212,7 +168,7 @@
             // 
             this.lblDestination.AutoSize = true;
             this.lblDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDestination.Location = new System.Drawing.Point(12, 354);
+            this.lblDestination.Location = new System.Drawing.Point(12, 326);
             this.lblDestination.Name = "lblDestination";
             this.lblDestination.Size = new System.Drawing.Size(178, 17);
             this.lblDestination.TabIndex = 29;
@@ -223,7 +179,7 @@
             this.comboBoxSelectProject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxSelectProject.FormattingEnabled = true;
-            this.comboBoxSelectProject.Location = new System.Drawing.Point(273, 166);
+            this.comboBoxSelectProject.Location = new System.Drawing.Point(273, 239);
             this.comboBoxSelectProject.Name = "comboBoxSelectProject";
             this.comboBoxSelectProject.Size = new System.Drawing.Size(274, 24);
             this.comboBoxSelectProject.TabIndex = 35;
@@ -232,7 +188,7 @@
             // 
             this.lblSelectProject.AutoSize = true;
             this.lblSelectProject.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectProject.Location = new System.Drawing.Point(12, 166);
+            this.lblSelectProject.Location = new System.Drawing.Point(12, 239);
             this.lblSelectProject.Name = "lblSelectProject";
             this.lblSelectProject.Size = new System.Drawing.Size(95, 17);
             this.lblSelectProject.TabIndex = 34;
@@ -240,10 +196,11 @@
             // 
             // comboBoxSelectProjectEnd
             // 
+            this.comboBoxSelectProjectEnd.BackColor = System.Drawing.SystemColors.Window;
             this.comboBoxSelectProjectEnd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectProjectEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxSelectProjectEnd.FormattingEnabled = true;
-            this.comboBoxSelectProjectEnd.Location = new System.Drawing.Point(273, 460);
+            this.comboBoxSelectProjectEnd.Location = new System.Drawing.Point(273, 499);
             this.comboBoxSelectProjectEnd.Name = "comboBoxSelectProjectEnd";
             this.comboBoxSelectProjectEnd.Size = new System.Drawing.Size(274, 24);
             this.comboBoxSelectProjectEnd.TabIndex = 37;
@@ -252,7 +209,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 460);
+            this.label1.Location = new System.Drawing.Point(12, 499);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 17);
             this.label1.TabIndex = 36;
@@ -310,7 +267,7 @@
             this.btnDestinationLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDestinationLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDestinationLogin.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDestinationLogin.Location = new System.Drawing.Point(273, 401);
+            this.btnDestinationLogin.Location = new System.Drawing.Point(273, 412);
             this.btnDestinationLogin.Name = "btnDestinationLogin";
             this.btnDestinationLogin.Size = new System.Drawing.Size(274, 32);
             this.btnDestinationLogin.TabIndex = 31;
@@ -324,7 +281,7 @@
             this.btnCurrentLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCurrentLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCurrentLogin.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCurrentLogin.Location = new System.Drawing.Point(273, 103);
+            this.btnCurrentLogin.Location = new System.Drawing.Point(273, 150);
             this.btnCurrentLogin.Name = "btnCurrentLogin";
             this.btnCurrentLogin.Size = new System.Drawing.Size(274, 32);
             this.btnCurrentLogin.TabIndex = 17;
@@ -349,10 +306,6 @@
             this.Controls.Add(this.btnDestinationLogin);
             this.Controls.Add(this.drpDestination);
             this.Controls.Add(this.lblDestination);
-            this.Controls.Add(this.chkBoxcommonExtra);
-            this.Controls.Add(this.chkBoxcommonAdvanced);
-            this.Controls.Add(this.chkBoxcommonBasic);
-            this.Controls.Add(this.lblOptions);
             this.Controls.Add(this.lblLogin1);
             this.Controls.Add(this.btnCurrentLogin);
             this.Controls.Add(this.drpCurrent);
@@ -381,10 +334,6 @@
         private System.Windows.Forms.ComboBox drpCurrent;
         private Resources.Custom_Designs.RoundCornersButton btnCurrentLogin;
         private System.Windows.Forms.Label lblLogin1;
-        private System.Windows.Forms.Label lblOptions;
-        private System.Windows.Forms.CheckBox chkBoxcommonBasic;
-        private System.Windows.Forms.CheckBox chkBoxcommonAdvanced;
-        private System.Windows.Forms.CheckBox chkBoxcommonExtra;
         private System.Windows.Forms.Label lblLogin2;
         private Resources.Custom_Designs.RoundCornersButton btnDestinationLogin;
         private System.Windows.Forms.ComboBox drpDestination;
