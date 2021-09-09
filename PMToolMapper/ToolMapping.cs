@@ -108,5 +108,16 @@ namespace PMToolMapper
            // MappingTempData.toToolId = listBox2.ValueMember;
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You sure You want to map selected tools?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+
+                groupingFeatures.Visible = true;
+                MappingTempData.fromToolName = listBox1.GetItemText(listBox1.SelectedItem);
+                MappingTempData.toToolName = listBox2.GetItemText(listBox2.SelectedItem);
+
+            }
+        }
     }
 }

@@ -43,13 +43,13 @@
             // 
             this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTop.BackColor = System.Drawing.Color.SkyBlue;
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(137)))));
             this.pnlTop.Controls.Add(this.homeBtn);
             this.pnlTop.Controls.Add(this.btnSettings);
             this.pnlTop.Controls.Add(this.lblpm);
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1307, 48);
+            this.pnlTop.Size = new System.Drawing.Size(1307, 75);
             this.pnlTop.TabIndex = 11;
             // 
             // homeBtn
@@ -61,7 +61,7 @@
             this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.homeBtn.ForeColor = System.Drawing.Color.SkyBlue;
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
-            this.homeBtn.Location = new System.Drawing.Point(10, 5);
+            this.homeBtn.Location = new System.Drawing.Point(10, 18);
             this.homeBtn.Margin = new System.Windows.Forms.Padding(1);
             this.homeBtn.Name = "homeBtn";
             this.homeBtn.Size = new System.Drawing.Size(40, 40);
@@ -78,7 +78,7 @@
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.ForeColor = System.Drawing.Color.SkyBlue;
             this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
-            this.btnSettings.Location = new System.Drawing.Point(1257, 1);
+            this.btnSettings.Location = new System.Drawing.Point(1257, 14);
             this.btnSettings.Margin = new System.Windows.Forms.Padding(1);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(40, 40);
@@ -91,8 +91,8 @@
             this.lblpm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblpm.AutoSize = true;
             this.lblpm.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblpm.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblpm.Location = new System.Drawing.Point(594, 10);
+            this.lblpm.ForeColor = System.Drawing.Color.White;
+            this.lblpm.Location = new System.Drawing.Point(594, 23);
             this.lblpm.Name = "lblpm";
             this.lblpm.Size = new System.Drawing.Size(169, 22);
             this.lblpm.TabIndex = 0;
@@ -113,10 +113,10 @@
             "TFS TO JIRA",
             "JIRA TO TFS",
             "TFS TO VSTS"});
-            this.listBox1.Location = new System.Drawing.Point(10, 65);
+            this.listBox1.Location = new System.Drawing.Point(10, 81);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(1236, 516);
+            this.listBox1.Size = new System.Drawing.Size(1286, 500);
             this.listBox1.TabIndex = 12;
             // 
             // individualReport

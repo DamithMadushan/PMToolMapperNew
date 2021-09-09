@@ -309,5 +309,19 @@ namespace PMToolMapper
             }
 
         }
+
+        private void homeBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            PMToolMapping pMToolMapping = new PMToolMapping();
+            pMToolMapping.ShowDialog();
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            UserManager userManager = new UserManager();
+            userManager.ShowDialog();
+        }
     }
 }

@@ -42,13 +42,13 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.UserdataGridView = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errormsg = new System.Windows.Forms.Label();
             this.labelRole = new System.Windows.Forms.Label();
             this.drpRole = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.homeBtn = new System.Windows.Forms.Button();
             this.lblpm = new System.Windows.Forms.Label();
-            this.errormsg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserdataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -158,12 +158,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UserdataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UserdataGridView.Location = new System.Drawing.Point(0, 3);
+            this.UserdataGridView.Location = new System.Drawing.Point(0, 0);
             this.UserdataGridView.MultiSelect = false;
             this.UserdataGridView.Name = "UserdataGridView";
             this.UserdataGridView.ReadOnly = true;
             this.UserdataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserdataGridView.Size = new System.Drawing.Size(860, 615);
+            this.UserdataGridView.Size = new System.Drawing.Size(860, 602);
             this.UserdataGridView.TabIndex = 40;
             this.UserdataGridView.SelectionChanged += new System.EventHandler(this.UserdataGridView_SelectionChanged);
             // 
@@ -182,10 +182,20 @@
             this.panel1.Controls.Add(this.lblPassword);
             this.panel1.Controls.Add(this.lblConfirmPassword);
             this.panel1.Controls.Add(this.textBoxPassword);
-            this.panel1.Location = new System.Drawing.Point(2, 63);
+            this.panel1.Location = new System.Drawing.Point(2, 79);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(438, 621);
+            this.panel1.Size = new System.Drawing.Size(438, 605);
             this.panel1.TabIndex = 41;
+            // 
+            // errormsg
+            // 
+            this.errormsg.AutoSize = true;
+            this.errormsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errormsg.ForeColor = System.Drawing.Color.Red;
+            this.errormsg.Location = new System.Drawing.Point(110, 221);
+            this.errormsg.Name = "errormsg";
+            this.errormsg.Size = new System.Drawing.Size(0, 13);
+            this.errormsg.TabIndex = 42;
             // 
             // labelRole
             // 
@@ -216,62 +226,53 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.UserdataGridView);
-            this.panel2.Location = new System.Drawing.Point(446, 63);
+            this.panel2.Location = new System.Drawing.Point(446, 79);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(863, 621);
+            this.panel2.Size = new System.Drawing.Size(863, 605);
             this.panel2.TabIndex = 42;
             // 
             // pnlTop
             // 
             this.pnlTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTop.BackColor = System.Drawing.Color.SkyBlue;
+            this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(137)))));
             this.pnlTop.Controls.Add(this.homeBtn);
             this.pnlTop.Controls.Add(this.lblpm);
-            this.pnlTop.Location = new System.Drawing.Point(2, 0);
+            this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1307, 48);
+            this.pnlTop.Size = new System.Drawing.Size(1307, 75);
             this.pnlTop.TabIndex = 43;
             // 
             // homeBtn
             // 
             this.homeBtn.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.homeBtn.FlatAppearance.BorderColor = System.Drawing.Color.SkyBlue;
-            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.SkyBlue;
-            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SkyBlue;
+            this.homeBtn.FlatAppearance.BorderSize = 0;
+            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(137)))));
+            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(135)))), ((int)(((byte)(137)))));
             this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.homeBtn.ForeColor = System.Drawing.Color.SkyBlue;
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
-            this.homeBtn.Location = new System.Drawing.Point(10, 5);
+            this.homeBtn.Location = new System.Drawing.Point(27, 14);
             this.homeBtn.Margin = new System.Windows.Forms.Padding(1);
             this.homeBtn.Name = "homeBtn";
             this.homeBtn.Size = new System.Drawing.Size(40, 40);
-            this.homeBtn.TabIndex = 19;
+            this.homeBtn.TabIndex = 3;
             this.homeBtn.UseVisualStyleBackColor = true;
-            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
+            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click_1);
             // 
             // lblpm
             // 
             this.lblpm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblpm.AutoSize = true;
             this.lblpm.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblpm.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lblpm.Location = new System.Drawing.Point(594, 10);
+            this.lblpm.ForeColor = System.Drawing.Color.White;
+            this.lblpm.Location = new System.Drawing.Point(591, 27);
             this.lblpm.Name = "lblpm";
             this.lblpm.Size = new System.Drawing.Size(135, 22);
             this.lblpm.TabIndex = 0;
             this.lblpm.Text = "User Manager";
             this.lblpm.UseMnemonic = false;
-            // 
-            // errormsg
-            // 
-            this.errormsg.AutoSize = true;
-            this.errormsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errormsg.ForeColor = System.Drawing.Color.Red;
-            this.errormsg.Location = new System.Drawing.Point(110, 221);
-            this.errormsg.Name = "errormsg";
-            this.errormsg.Size = new System.Drawing.Size(0, 13);
-            this.errormsg.TabIndex = 42;
             // 
             // UserManager
             // 
@@ -282,6 +283,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1050, 489);
             this.Name = "UserManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PM Tool Mapper  - UserManager";
@@ -313,11 +315,11 @@
         private System.Windows.Forms.DataGridView UserdataGridView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel pnlTop;
-        private System.Windows.Forms.Button homeBtn;
-        private System.Windows.Forms.Label lblpm;
         private System.Windows.Forms.Label labelRole;
         private System.Windows.Forms.ComboBox drpRole;
         private System.Windows.Forms.Label errormsg;
+        private System.Windows.Forms.Panel pnlTop;
+        private System.Windows.Forms.Button homeBtn;
+        private System.Windows.Forms.Label lblpm;
     }
 }

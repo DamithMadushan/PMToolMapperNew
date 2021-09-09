@@ -289,7 +289,7 @@ namespace PMToolMapper
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString(), "Message");
+               // MessageBox.Show(ex.Message.ToString(), "Message");
             }
 
 
@@ -690,9 +690,82 @@ namespace PMToolMapper
             return response;
         }
 
+        private void buttonMigrate_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are You sure You want to migrate selected tools?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (!string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text) && !string.IsNullOrEmpty(comboBoxSelectProject.Text))
+                {
+
+                    lblMigrationProgress.Visible = true;
+
+                    setDelay().Wait();
+
+
+                    MigrationTempData.fromToolName = drpCurrent.Text;
+                    MigrationTempData.toToolName = drpDestination.Text;
+
+                    long mappingId = ToolMigrationService.insertMappingID(comboBoxSelectProject.Text, comboBoxSelectProjectEnd.Text);
+
+
+                    /////////////////
+
+
+                    if (drpCurrent.Text == "Jira" && drpDestination.Text == "TFS")
+                    {
+                        TFSIssuesCreate();
+
+                    }
+                    else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
+                    {
+                        JiraIssuesCreateFromTFS();
+                    }
 
 
 
+
+
+
+                    //////////////////////
+
+
+                    lblMigrationProgress.Visible = false;
+
+                    this.Hide();
+                    ToolMigrationHistoryReport toolMigrationHistoryReport = new ToolMigrationHistoryReport(1);
+                    toolMigrationHistoryReport.ShowDialog();
+
+
+                }
+                else
+                {
+
+
+                    MessageBox.Show("Please select projects to migrate!");
+
+                }
+
+            }
+        }
+
+        private void jiraInfo1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSettings_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            UserManager userManager = new UserManager();
+            userManager.ShowDialog();
+        }
+
+        private void homeBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            PMToolMapping pMToolMapping = new PMToolMapping();
+            pMToolMapping.ShowDialog();
+        }
     }
 
 

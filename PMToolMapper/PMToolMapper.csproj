@@ -369,6 +369,10 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="pmticon.ico" />
+    <Content Include="Resources\Icons\business-report.png" />
+    <Content Include="Resources\Icons\migrating.png" />
+    <Content Include="Resources\Icons\nodes.png" />
+    <Content Include="Resources\Icons\seo-report.png" />
     <Content Include="Resources\Images\homenew.png" />
     <Content Include="Resources\Images\ld.gif" />
     <Content Include="Resources\Images\loading-buffering.gif" />

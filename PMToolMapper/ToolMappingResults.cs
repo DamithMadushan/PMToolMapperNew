@@ -191,5 +191,31 @@ namespace PMToolMapper
 
 
         }
+
+        private void btnSettings_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            UserManager userManager = new UserManager();
+            userManager.ShowDialog();
+        }
+
+        private void homeBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            PMToolMapping pMToolMapping = new PMToolMapping();
+            pMToolMapping.ShowDialog();
+        }
+
+        private void buttonGenerateReport_Click(object sender, EventArgs e)
+        {
+            TooMappingResultReport tooMappingResultReport = new TooMappingResultReport(1);
+            this.Hide();
+            tooMappingResultReport.ShowDialog();
+        }
+
+        private void lblMappingInfo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

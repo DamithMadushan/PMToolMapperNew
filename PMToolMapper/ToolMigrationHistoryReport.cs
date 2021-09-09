@@ -204,5 +204,36 @@ namespace PMToolMapper
 
         }
 
+        private void buttonGenerateReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long selecttedReport = Convert.ToInt64(comboBoxReportName.SelectedValue);
+
+                if (selecttedReport != null || selecttedReport != -1)
+                {
+                    loadReportCustom(selecttedReport);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void homeBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            PMToolMapping pMToolMapping = new PMToolMapping();
+            pMToolMapping.ShowDialog();
+        }
+
+        private void btnSettings_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            UserManager userManager = new UserManager();
+            userManager.ShowDialog();
+        }
     }
 }

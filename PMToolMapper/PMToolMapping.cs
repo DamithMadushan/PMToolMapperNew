@@ -86,44 +86,78 @@ namespace PMToolMapper
             userManager.ShowDialog();
         }
 
-        private void btnMapTools_MouseHover(object sender, EventArgs e)
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ToolMapping toolMapping = new ToolMapping();
+            toolMapping.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            TooMappingResultReport tooMappingResultReport = new TooMappingResultReport(2);
+            tooMappingResultReport.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ToolMigration toolMigration = new ToolMigration();
+            toolMigration.ShowDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ToolMigrationHistoryReport toolMigrationHistory = new ToolMigrationHistoryReport(2);
+            toolMigrationHistory.ShowDialog();
+        }
+
+        private void buttonMapTL_MouseHover(object sender, EventArgs e)
         {
             desTextBox.Text = "Map Pm Tools";
-            btnMapTools.BackColor = Color.BlueViolet;
+            //buttonMapTL.BackColor = Color.FromArgb(22, 144, 248);
 
-            btnMappingsReports.BackColor = Color.SlateBlue;
-            btnMigratePMTools.BackColor = Color.SlateBlue;
-            btnToolMigrationHistory.BackColor = Color.SlateBlue;
+            //buttonGenerateMPToolReport.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonMigratePMTools.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonToolMigrationHistoryReport.BackColor = Color.FromArgb(48, 50, 74);
         }
 
-        private void btnMappingsReports_MouseHover(object sender, EventArgs e)
+        private void buttonGenerateMPTool_MouseHover(object sender, EventArgs e)
         {
             desTextBox.Text = "Generate Mapping Reports";
-            btnMappingsReports.BackColor = Color.BlueViolet;
+            //buttonGenerateMPToolReport.BackColor = Color.FromArgb(22, 144, 248);
 
-            btnMapTools.BackColor = Color.SlateBlue;
-            btnMigratePMTools.BackColor = Color.SlateBlue;
-            btnToolMigrationHistory.BackColor = Color.SlateBlue;
+            //buttonMapTL.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonMigratePMTools.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonToolMigrationHistoryReport.BackColor = Color.FromArgb(48, 50, 74);
         }
 
-        private void btnMigratePMTools_MouseHover(object sender, EventArgs e)
+        private void buttonMigratePMTools_MouseHover(object sender, EventArgs e)
         {
             desTextBox.Text = "Migrate PM Tools";
-            btnMigratePMTools.BackColor = Color.BlueViolet;
+            //buttonMigratePMTools.BackColor = Color.FromArgb(22, 144, 248);
 
-            btnMappingsReports.BackColor = Color.SlateBlue;
-            btnMapTools.BackColor = Color.SlateBlue;
-            btnToolMigrationHistory.BackColor = Color.SlateBlue;
+            //buttonGenerateMPToolReport.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonMapTL.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonToolMigrationHistoryReport.BackColor = Color.FromArgb(48, 50, 74);
         }
 
-        private void btnToolMigrationHistory_MouseHover(object sender, EventArgs e)
+        private void buttonToolMigrationHistory_MouseHover(object sender, EventArgs e)
         {
             desTextBox.Text = "Tool migration history";
-            btnToolMigrationHistory.BackColor = Color.BlueViolet;
+            //buttonToolMigrationHistoryReport.BackColor = Color.FromArgb(22, 144, 248);
 
-            btnMigratePMTools.BackColor = Color.SlateBlue;
-            btnMappingsReports.BackColor = Color.SlateBlue;
-            btnMapTools.BackColor = Color.SlateBlue;
+            //buttonMapTL.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonGenerateMPToolReport.BackColor = Color.FromArgb(48, 50, 74);
+            //buttonMigratePMTools.BackColor = Color.FromArgb(48, 50, 74);
         }
     }
 }
