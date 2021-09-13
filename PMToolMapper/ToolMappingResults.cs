@@ -89,7 +89,8 @@ namespace PMToolMapper
                 foreach (ToolMappingDataModel toolFeature in _commonBasictoolFeatures)
                 {
                     listBox1.Items.Add(toolFeature.FeatureName + " - " + toolFeature.FromToolName + "(" + toolFeature.FromToolYesNo + ")" + " - " + toolFeature.ToToolName + "(" + toolFeature.ToToolYesNo + ")");
-
+                    
+                    listBox1.Items.Add("");
                     //matching records
                     if (toolFeature.FromToolYesNo == "Yes" && toolFeature.ToToolYesNo == "Yes")
                     {
@@ -110,7 +111,8 @@ namespace PMToolMapper
                 foreach (ToolMappingDataModel toolFeature in _commonAdvancedtoolFeatures)
                 {
                     listBox2.Items.Add(toolFeature.FeatureName + " - " + toolFeature.FromToolName + "(" + toolFeature.FromToolYesNo + ")" + " - " + toolFeature.ToToolName + "(" + toolFeature.ToToolYesNo + ")");
-
+                    
+                    listBox2.Items.Add("");
 
                     //matching records
                     if (toolFeature.FromToolYesNo == "Yes" && toolFeature.ToToolYesNo == "Yes")
@@ -136,6 +138,7 @@ namespace PMToolMapper
                 {
                     listBox3.Items.Add(toolFeature.FeatureName + " - " + toolFeature.FromToolName + "(" + toolFeature.FromToolYesNo + ")" + " - " + toolFeature.ToToolName + "(" + toolFeature.ToToolYesNo + ")");
 
+                    listBox3.Items.Add("");
 
                     //matching records
                     if (toolFeature.FromToolYesNo == "Yes" && toolFeature.ToToolYesNo == "Yes")
