@@ -18,6 +18,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Services.Description;
@@ -374,6 +375,102 @@ namespace PMToolMapper
         }
 
 
+        private void JiraIssuesCreateFromTFSToGitLab()
+        {
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
+                {
+                    string selectedProjectId = comboBoxSelectProjectEnd.SelectedValue.ToString();
+
+                    string token = TFSInfoModel.Token;
+                    string org = TFSInfoModel.Organization;
+                    Uri url = new Uri("https://dev.azure.com/" + org);
+                    string project = comboBoxSelectProject.Text;
+
+
+                    VssBasicCredential credentials = new VssBasicCredential("", token);
+
+                    Wiql wiql = new Wiql()
+                    {
+                        Query = "Select [State], [Title],[Remaining Work] From WorkItems Where [Work Item Type] = 'Issue' OR [Work Item Type] = 'Task' And [System.TeamProject] = '" + project + "'"
+                    };
+
+                    //create instance of work item tracking http client
+                    using (WorkItemTrackingHttpClient workItemTrackingHttpClient = new WorkItemTrackingHttpClient(url, credentials))
+                    {
+                        //execute the query to get the list of work items in the results
+                        WorkItemQueryResult workItemQueryResult = workItemTrackingHttpClient.QueryByWiqlAsync(wiql).Result;
+
+                        //some error handling                
+                        if (workItemQueryResult.WorkItems.Count() != 0)
+                        {
+                            foreach (IEnumerable<WorkItemReference> batch in workItemQueryResult.WorkItems.Batch(100))
+                            {
+                                var workItemIds = batch.Select(p => p.Id).ToArray();
+                                var workItems = workItemTrackingHttpClient.GetWorkItemsAsync(workItemIds, expand: WorkItemExpand.All).Result;
+
+                                foreach (var workItem in workItems)
+                                {
+                                    string taskType = "";
+                                    string taskName = "";
+
+                                    foreach (var field in workItem.Fields)
+                                    {
+                                        if (field.Key == "System.WorkItemType")
+                                        {
+                                            taskType = field.Value.ToString();
+
+                                        }
+                                        else if (field.Key == "System.Title")
+                                        {
+                                            taskName = field.Value.ToString();
+                                        }
+
+                                    }
+
+                                    string tokenGitLab = GitLabInfoModel.token;
+                                    string useridGitLab = GitLabInfoModel.userid;
+
+                                    taskName = taskName.Replace(" ", "%20");
+
+                                    if(taskType == "Issue" || taskType == "Task")
+                                    {
+                                        string urlgitlab = "https://gitlab.com/api/v4/projects/" + selectedProjectId + "/issues?title=" + taskName + "&labels=" + taskType;
+
+
+
+                                        CreateIssuesGitLab(urlgitlab, tokenGitLab);
+                                    }
+
+
+
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a project!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+
 
 
         private void getProjectsJira(object sender, EventArgs e)
@@ -482,6 +579,19 @@ namespace PMToolMapper
 
 
         public IRestResponse GetResponseProjectsGitLab(string url, string personalAccessToken, Method method = Method.GET)
+        {
+
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("PRIVATE-TOKEN", personalAccessToken);
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
+
+
+
+        public IRestResponse CreateIssuesGitLab(string url, string personalAccessToken, Method method = Method.POST)
         {
 
             var client = new RestClient(url);
@@ -775,7 +885,7 @@ namespace PMToolMapper
                 tfsInfo1.Visible = true;
 
             }
-            else if (drpCurrent.Text == "GitLab")
+            else if (drpDestination.Text == "GitLab")
             {
 
                 gitLabInfo1.Visible = true;
@@ -907,7 +1017,7 @@ namespace PMToolMapper
                     if (drpCurrent.Text == "Jira" && drpDestination.Text == "TFS")
                     {
                         TFSIssuesCreate();
-
+                        
                     }
                     else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
                     {
@@ -915,6 +1025,10 @@ namespace PMToolMapper
                     }else if(drpCurrent.Text == "GitLab" && drpDestination.Text == "TFS")
                     {
                         TFSIssuesCreateFromGitLab();
+                    }
+                    else if (drpCurrent.Text == "TFS" && drpDestination.Text == "GitLab")
+                    {
+                        JiraIssuesCreateFromTFSToGitLab();
                     }
 
 
