@@ -49,6 +49,7 @@
             this.jiraInfo1 = new PMToolMapper.JiraInfo();
             this.btnDestinationLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnCurrentLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
+            this.gitLabInfo1 = new PMToolMapper.GitLabInfo();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -280,11 +281,12 @@
             this.tfsInfo1.Name = "tfsInfo1";
             this.tfsInfo1.Size = new System.Drawing.Size(573, 285);
             this.tfsInfo1.TabIndex = 39;
+            this.tfsInfo1.Load += new System.EventHandler(this.tfsInfo1_Load);
             // 
             // jiraInfo1
             // 
             this.jiraInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.jiraInfo1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.jiraInfo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.jiraInfo1.Location = new System.Drawing.Point(441, 228);
             this.jiraInfo1.Name = "jiraInfo1";
             this.jiraInfo1.Size = new System.Drawing.Size(573, 288);
@@ -331,11 +333,21 @@
             this.btnCurrentLogin.UseVisualStyleBackColor = false;
             this.btnCurrentLogin.Click += new System.EventHandler(this.btnCurrentLogin_Click);
             // 
+            // gitLabInfo1
+            // 
+            this.gitLabInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.gitLabInfo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.gitLabInfo1.Location = new System.Drawing.Point(441, 228);
+            this.gitLabInfo1.Name = "gitLabInfo1";
+            this.gitLabInfo1.Size = new System.Drawing.Size(573, 288);
+            this.gitLabInfo1.TabIndex = 43;
+            // 
             // ToolMigration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.gitLabInfo1);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.buttonMigrate);
             this.Controls.Add(this.lblMigrationProgress);
@@ -388,5 +400,6 @@
         private System.Windows.Forms.Button homeBtn;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblpm;
+        private GitLabInfo gitLabInfo1;
     }
 }

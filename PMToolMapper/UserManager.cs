@@ -72,187 +72,222 @@ namespace PMToolMapper
             string confirmPassword = textBoxConfirmPassword.Text;
 
 
-
-            UserModel userModel = new UserModel
+            if(password != confirmPassword)
+            {
+                errormsg.ForeColor = Color.Red;
+                errormsg.Text = "Password is mot matching!";
+            }
+            else
             {
 
-                userFullName = userFullName,
-                userName = userName,
-                Role = userRole,
-                password = password,
-                confirmPassword = confirmPassword,
-                Date = DateTime.Now.ToString()
 
-            };
-
-            //update user
-            if (UpdateUser)
-            {
-                userModel.userId = Convert.ToInt32(Userid);
-
-                if (password == "")
+                if (password == confirmPassword && !userFullName.Equals("") && !userName.Equals("") && !userRole.Equals("--Select--"))
                 {
-                    userModel.password = Password;
-                }
 
-                if (UserService.UpdateUser(userModel))
-                {
-                    errormsg.ForeColor = Color.Green;
-                    errormsg.Text = "Successfully updated!";
-
-
-                    Userid = "";
-
-                    //users
-                    List<UserManegeModel> _userList = new List<UserManegeModel>();
-
-                    foreach (var user in UserService.getUserList())
+                    UserModel userModel = new UserModel
                     {
 
-                        UserManegeModel oneUser = new UserManegeModel()
+                        userFullName = userFullName,
+                        userName = userName,
+                        Role = userRole,
+                        password = password,
+                        confirmPassword = confirmPassword,
+                        Date = DateTime.Now.ToString()
+
+                    };
+
+                    //update user
+                    if (UpdateUser)
+                    {
+
+
+                        userModel.userId = Convert.ToInt32(Userid);
+
+                        if (password == "")
+                        {
+                            userModel.password = Password;
+                        }
+
+                        if (UserService.UpdateUser(userModel))
+                        {
+                            errormsg.ForeColor = Color.Green;
+                            errormsg.Text = "Successfully updated!";
+
+
+                            Userid = "";
+
+                            //users
+                            List<UserManegeModel> _userList = new List<UserManegeModel>();
+
+                            foreach (var user in UserService.getUserList())
+                            {
+
+                                UserManegeModel oneUser = new UserManegeModel()
+                                {
+
+                                    UserId = user.UserId,
+                                    UserFullName = user.UserFullName,
+                                    UserName = user.UserName,
+                                    Password = user.Password,
+                                    Role = user.Role,
+                                    Date = user.Date
+
+                                };
+
+                                _userList.Add(oneUser);
+                            }
+
+
+                            UserdataGridView.DataSource = _userList;
+                            UserdataGridView.ClearSelection();
+                            UserdataGridView.Columns["Password"].Visible = false;
+
+                            UpdateUser = false;
+                            Clear();
+                        }
+                        else
+                        {
+                            errormsg.ForeColor = Color.Red;
+                            errormsg.Text = "Update error!";
+
+
+                            Userid = "";
+
+                            //users
+                            List<UserManegeModel> _userList = new List<UserManegeModel>();
+
+                            foreach (var user in UserService.getUserList())
+                            {
+
+                                UserManegeModel oneUser = new UserManegeModel()
+                                {
+
+                                    UserId = user.UserId,
+                                    UserFullName = user.UserFullName,
+                                    UserName = user.UserName,
+                                    Password = user.Password,
+                                    Role = user.Role,
+                                    Date = user.Date
+
+                                };
+
+                                _userList.Add(oneUser);
+                            }
+
+
+                            UserdataGridView.DataSource = _userList;
+                            UserdataGridView.ClearSelection();
+                            UserdataGridView.Columns["Password"].Visible = false;
+
+                            UpdateUser = false;
+                            Clear();
+
+                        }
+                    }
+
+                    else
+                    {
+
+                        //add password check
+                        if(password.Equals("") || confirmPassword.Equals(""))
+                        {
+                            errormsg.ForeColor = Color.Green;
+                            errormsg.Text = "Password is empty!";
+
+                        }
+                        else
                         {
 
-                            UserId = user.UserId,
-                            UserFullName = user.UserFullName,
-                            UserName = user.UserName,
-                            Password = user.Password,
-                            Role = user.Role,
-                            Date = user.Date
 
-                        };
+                            if (UserService.AddUser(userModel))
+                            {
 
-                        _userList.Add(oneUser);
+                                errormsg.ForeColor = Color.Green;
+                                errormsg.Text = "Successfully added!";
+
+                                //users
+                                List<UserManegeModel> _userList = new List<UserManegeModel>();
+
+                                foreach (var user in UserService.getUserList())
+                                {
+
+                                    UserManegeModel oneUser = new UserManegeModel()
+                                    {
+
+                                        UserId = user.UserId,
+                                        UserFullName = user.UserFullName,
+                                        UserName = user.UserName,
+                                        Password = user.Password,
+                                        Role = user.Role,
+                                        Date = user.Date
+
+                                    };
+
+                                    _userList.Add(oneUser);
+                                }
+
+
+                                UserdataGridView.DataSource = _userList;
+                                UserdataGridView.ClearSelection();
+                                UserdataGridView.Columns["Password"].Visible = false;
+
+                                UpdateUser = false;
+                                Clear();
+                            }
+                            else
+                            {
+
+                                errormsg.ForeColor = Color.Red;
+                                errormsg.Text = "User add error!";
+
+                                //users
+                                List<UserManegeModel> _userList = new List<UserManegeModel>();
+
+                                foreach (var user in UserService.getUserList())
+                                {
+
+                                    UserManegeModel oneUser = new UserManegeModel()
+                                    {
+
+                                        UserId = user.UserId,
+                                        UserFullName = user.UserFullName,
+                                        UserName = user.UserName,
+                                        Password = user.Password,
+                                        Role = user.Role,
+                                        Date = user.Date
+
+                                    };
+
+                                    _userList.Add(oneUser);
+                                }
+
+
+                                UserdataGridView.DataSource = _userList;
+                                UserdataGridView.ClearSelection();
+                                UserdataGridView.Columns["Password"].Visible = false;
+
+                                UpdateUser = false;
+                                Clear();
+                            }
+
+
+                        }
+
+
                     }
 
 
-                    UserdataGridView.DataSource = _userList;
-                    UserdataGridView.ClearSelection();
-                    UserdataGridView.Columns["Password"].Visible = false;
 
-                    UpdateUser = false;
-                    Clear();
                 }
                 else
                 {
                     errormsg.ForeColor = Color.Red;
-                    errormsg.Text = "Update error!";
-
-
-                    Userid = "";
-
-                    //users
-                    List<UserManegeModel> _userList = new List<UserManegeModel>();
-
-                    foreach (var user in UserService.getUserList())
-                    {
-
-                        UserManegeModel oneUser = new UserManegeModel()
-                        {
-
-                            UserId = user.UserId,
-                            UserFullName = user.UserFullName,
-                            UserName = user.UserName,
-                            Password = user.Password,
-                            Role = user.Role,
-                            Date = user.Date
-
-                        };
-
-                        _userList.Add(oneUser);
-                    }
-
-
-                    UserdataGridView.DataSource = _userList;
-                    UserdataGridView.ClearSelection();
-                    UserdataGridView.Columns["Password"].Visible = false;
-
-                    UpdateUser = false;
-                    Clear();
-
+                    errormsg.Text = "Please fill all fields!";
                 }
-
-            }
-            else
-            {
-                if (password == confirmPassword)
-                {
-
-                    if (UserService.AddUser(userModel))
-                    {
-
-                        errormsg.ForeColor = Color.Green;
-                        errormsg.Text = "Successfully added!";
-
-                        //users
-                        List<UserManegeModel> _userList = new List<UserManegeModel>();
-
-                        foreach (var user in UserService.getUserList())
-                        {
-
-                            UserManegeModel oneUser = new UserManegeModel()
-                            {
-
-                                UserId = user.UserId,
-                                UserFullName = user.UserFullName,
-                                UserName = user.UserName,
-                                Password = user.Password,
-                                Role = user.Role,
-                                Date = user.Date
-
-                            };
-
-                            _userList.Add(oneUser);
-                        }
-
-
-                        UserdataGridView.DataSource = _userList;
-                        UserdataGridView.ClearSelection();
-                        UserdataGridView.Columns["Password"].Visible = false;
-
-                        UpdateUser = false;
-                        Clear();
-                    }
-                    else
-                    {
-
-                        errormsg.ForeColor = Color.Red;
-                        errormsg.Text = "User add error!";
-
-                        //users
-                        List<UserManegeModel> _userList = new List<UserManegeModel>();
-
-                        foreach (var user in UserService.getUserList())
-                        {
-
-                            UserManegeModel oneUser = new UserManegeModel()
-                            {
-
-                                UserId = user.UserId,
-                                UserFullName = user.UserFullName,
-                                UserName = user.UserName,
-                                Password = user.Password,
-                                Role = user.Role,
-                                Date = user.Date
-
-                            };
-
-                            _userList.Add(oneUser);
-                        }
-
-
-                        UserdataGridView.DataSource = _userList;
-                        UserdataGridView.ClearSelection();
-                        UserdataGridView.Columns["Password"].Visible = false;
-
-                        UpdateUser = false;
-                        Clear();
-                    }
-
-                }
-
             }
 
 
+            
 
         }
 

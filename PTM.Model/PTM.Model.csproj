@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AllFeaturesModel.cs" />
+    <Compile Include="Models\GitLabInfoModel.cs" />
     <Compile Include="Models\JiraInfoModel.cs" />
     <Compile Include="Models\LoadingMessage.cs" />
     <Compile Include="Models\MappingHistoryModel.cs" />

@@ -37,12 +37,15 @@ namespace PMToolMapper
 
             jiraInfo1.Visible = false;
             tfsInfo1.Visible = false;
+            gitLabInfo1.Visible = false;
             lblMigrationProgress.Visible = false;
 
             loadDropDowns();
 
             jiraInfo1.OkButtonClickJira += new EventHandler(getProjectsJira);
             tfsInfo1.OkButtonClickTFS += new EventHandler(getProjectsTFS);
+            gitLabInfo1.OkButtonClickGitLab += new EventHandler(getProjectsGitLab);
+
         }
 
         private void lblLogin1_Click(object sender, EventArgs e)
@@ -110,6 +113,11 @@ namespace PMToolMapper
             else if (drpCurrent.Text == "TFS")
             {
                 tfsInfo1.Visible = true;
+
+            }else if(drpCurrent.Text == "GitLab")
+            {
+
+                gitLabInfo1.Visible = true;
             }
 
         }
@@ -437,7 +445,7 @@ namespace PMToolMapper
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString(), "Message");
+              //  MessageBox.Show(ex.Message.ToString(), "Message");
             }
 
 
@@ -472,6 +480,29 @@ namespace PMToolMapper
 
         }
 
+
+        public IRestResponse GetResponseProjectsGitLab(string url, string personalAccessToken, Method method = Method.GET)
+        {
+
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("PRIVATE-TOKEN", personalAccessToken);
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
+
+
+        public IRestResponse GetResponseIssuesGitLab(string url, string personalAccessToken, Method method = Method.GET)
+        {
+
+            var client = new RestClient(url);
+            var request = new RestRequest(method);
+            request.AddHeader("PRIVATE-TOKEN", personalAccessToken);
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
 
 
         public IRestResponse GetResponseWorkItemsTFS(string url, string personalAccessToken, Method method = Method.POST)
@@ -567,6 +598,163 @@ namespace PMToolMapper
         }
 
 
+        private void getProjectsGitLab(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (!string.IsNullOrEmpty(GitLabInfoModel.token) && !string.IsNullOrEmpty(GitLabInfoModel.userid))
+                {
+
+                    string token = GitLabInfoModel.token;
+                    string userid = GitLabInfoModel.userid;
+                    string url = "https://gitlab.com/api/v4/users/" + userid + "/projects";
+
+
+                    var response = GetResponseProjectsGitLab(url, token);
+
+                    dynamic res = JsonConvert.DeserializeObject<List<GitLabRootProjects>>(response.Content);
+
+
+                    List<ProjectDropdown> projects = new List<ProjectDropdown>();
+
+                    foreach (GitLabRootProjects projectData in res)
+                    {
+
+                        ProjectDropdown projectDropdown = new ProjectDropdown()
+                        {
+
+                            ProjectId = projectData.id.ToString(),
+                            ProjectName = projectData.name
+
+                        };
+
+                        projects.Add(projectDropdown);
+
+
+
+                    }
+
+                    if (LoginOneClicked)
+                    {
+                        comboBoxSelectProject.DataSource = projects;
+                        comboBoxSelectProject.ValueMember = "ProjectId";
+                        comboBoxSelectProject.DisplayMember = "ProjectName";
+                    }
+
+
+                    if (LoginTwoClicked)
+                    {
+                        comboBoxSelectProjectEnd.DataSource = projects;
+                        comboBoxSelectProjectEnd.ValueMember = "ProjectId";
+                        comboBoxSelectProjectEnd.DisplayMember = "ProjectName";
+                    }
+
+
+                    gitLabInfo1.Visible = false;
+                    LoginOneClicked = false;
+                    LoginTwoClicked = false;
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Please fill project data!", "Message");
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                //MessageBox.Show(ex.Message.ToString(), "Message");
+            }
+
+
+        }
+
+
+        private void TFSIssuesCreateFromGitLab()
+        {
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(comboBoxSelectProject.Text) && !string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text))
+                {
+
+
+                    if (!string.IsNullOrEmpty(GitLabInfoModel.token) && !string.IsNullOrEmpty(GitLabInfoModel.userid))
+                    {
+
+                        string selectedProjectId = comboBoxSelectProject.SelectedValue.ToString();
+
+                        string tokenGitLab = GitLabInfoModel.token;
+                        string useridGitLab = GitLabInfoModel.userid;
+                        string url = "https://gitlab.com/api/v4/projects/"+ selectedProjectId +"/issues";
+
+
+                        var response = GetResponseIssuesGitLab(url, tokenGitLab);
+
+                        dynamic res = JsonConvert.DeserializeObject<List<RootGitLab>>(response.Content);
+
+
+
+                        foreach (RootGitLab issueData in res)
+                        {
+                            string issueName = "";
+                            string description = "";
+                            string issuetype = "";
+
+                            issueName = issueData.title;
+
+                            issuetype = "Issue";
+
+                            description = issueData.description;
+
+                     
+                                if (!string.IsNullOrEmpty(TFSInfoModel.Organization) && !string.IsNullOrEmpty(TFSInfoModel.Token))
+                                {
+                                    string project = comboBoxSelectProjectEnd.Text;
+                                    string token = TFSInfoModel.Token;
+                                    string org = TFSInfoModel.Organization;
+                                    string _url = "https://dev.azure.com/" + org;
+
+                                    CreateBugUsingClientLib(_url, token, project, issueName, issuetype, description);
+                                }
+
+                            
+
+
+
+
+
+                        }
+
+
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a project!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                // MessageBox.Show(ex.Message.ToString(), "Message");
+            }
+
+
+
+        }
+
 
 
 
@@ -586,6 +774,11 @@ namespace PMToolMapper
 
                 tfsInfo1.Visible = true;
 
+            }
+            else if (drpCurrent.Text == "GitLab")
+            {
+
+                gitLabInfo1.Visible = true;
             }
         }
 
@@ -719,6 +912,9 @@ namespace PMToolMapper
                     else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
                     {
                         JiraIssuesCreateFromTFS();
+                    }else if(drpCurrent.Text == "GitLab" && drpDestination.Text == "TFS")
+                    {
+                        TFSIssuesCreateFromGitLab();
                     }
 
 
@@ -765,6 +961,11 @@ namespace PMToolMapper
             this.Hide();
             PMToolMapping pMToolMapping = new PMToolMapping();
             pMToolMapping.ShowDialog();
+        }
+
+        private void tfsInfo1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 
@@ -911,4 +1112,229 @@ namespace PMToolMapper
         public int count { get; set; }
         public List<TFSValue> value { get; set; }
     }
+
+
+
+    ////////GitLab Projects///////////
+
+    public class GitLabProjectsNamespace
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string path { get; set; }
+        public string kind { get; set; }
+        public string full_path { get; set; }
+        public object parent_id { get; set; }
+        public string avatar_url { get; set; }
+        public string web_url { get; set; }
+    }
+
+    public class GitLabProjectsLinks
+    {
+        public string self { get; set; }
+        public string issues { get; set; }
+        public string merge_requests { get; set; }
+        public string repo_branches { get; set; }
+        public string labels { get; set; }
+        public string events { get; set; }
+        public string members { get; set; }
+    }
+
+    public class GitLabProjectsOwner
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string username { get; set; }
+        public string state { get; set; }
+        public string avatar_url { get; set; }
+        public string web_url { get; set; }
+    }
+
+    public class GitLabProjectsContainerExpirationPolicy
+    {
+        public string cadence { get; set; }
+        public bool enabled { get; set; }
+        public int keep_n { get; set; }
+        public string older_than { get; set; }
+        public string name_regex { get; set; }
+        public object name_regex_keep { get; set; }
+        public DateTime next_run_at { get; set; }
+    }
+
+    public class GitLabProjectsProjectAccess
+    {
+        public int access_level { get; set; }
+        public int notification_level { get; set; }
+    }
+
+    public class GitLabProjectsPermissions
+    {
+        public GitLabProjectsProjectAccess project_access { get; set; }
+        public object group_access { get; set; }
+    }
+
+    public class GitLabRootProjects
+    {
+        public int id { get; set; }
+        public string description { get; set; }
+        public string name { get; set; }
+        public string name_with_namespace { get; set; }
+        public string path { get; set; }
+        public string path_with_namespace { get; set; }
+        public DateTime created_at { get; set; }
+        public string default_branch { get; set; }
+        public List<object> tag_list { get; set; }
+        public List<object> topics { get; set; }
+        public string ssh_url_to_repo { get; set; }
+        public string http_url_to_repo { get; set; }
+        public string web_url { get; set; }
+        public string readme_url { get; set; }
+        public object avatar_url { get; set; }
+        public int forks_count { get; set; }
+        public int star_count { get; set; }
+        public DateTime last_activity_at { get; set; }
+        public GitLabProjectsNamespace @namespace { get; set; }
+        public string container_registry_image_prefix { get; set; }
+        public GitLabProjectsLinks _links { get; set; }
+        public bool packages_enabled { get; set; }
+        public bool empty_repo { get; set; }
+        public bool archived { get; set; }
+        public string visibility { get; set; }
+        public GitLabProjectsOwner owner { get; set; }
+        public bool resolve_outdated_diff_discussions { get; set; }
+        public GitLabProjectsContainerExpirationPolicy container_expiration_policy { get; set; }
+        public bool issues_enabled { get; set; }
+        public bool merge_requests_enabled { get; set; }
+        public bool wiki_enabled { get; set; }
+        public bool jobs_enabled { get; set; }
+        public bool snippets_enabled { get; set; }
+        public bool container_registry_enabled { get; set; }
+        public bool service_desk_enabled { get; set; }
+        public string service_desk_address { get; set; }
+        public bool can_create_merge_request_in { get; set; }
+        public string issues_access_level { get; set; }
+        public string repository_access_level { get; set; }
+        public string merge_requests_access_level { get; set; }
+        public string forking_access_level { get; set; }
+        public string wiki_access_level { get; set; }
+        public string builds_access_level { get; set; }
+        public string snippets_access_level { get; set; }
+        public string pages_access_level { get; set; }
+        public string operations_access_level { get; set; }
+        public string analytics_access_level { get; set; }
+        public string container_registry_access_level { get; set; }
+        public object emails_disabled { get; set; }
+        public bool shared_runners_enabled { get; set; }
+        public bool lfs_enabled { get; set; }
+        public int creator_id { get; set; }
+        public string import_status { get; set; }
+        public int open_issues_count { get; set; }
+        public int ci_default_git_depth { get; set; }
+        public bool ci_forward_deployment_enabled { get; set; }
+        public bool ci_job_token_scope_enabled { get; set; }
+        public bool public_jobs { get; set; }
+        public int build_timeout { get; set; }
+        public string auto_cancel_pending_pipelines { get; set; }
+        public object build_coverage_regex { get; set; }
+        public string ci_config_path { get; set; }
+        public List<object> shared_with_groups { get; set; }
+        public bool only_allow_merge_if_pipeline_succeeds { get; set; }
+        public object allow_merge_on_skipped_pipeline { get; set; }
+        public bool restrict_user_defined_variables { get; set; }
+        public bool request_access_enabled { get; set; }
+        public bool only_allow_merge_if_all_discussions_are_resolved { get; set; }
+        public bool remove_source_branch_after_merge { get; set; }
+        public bool printing_merge_request_link_enabled { get; set; }
+        public string merge_method { get; set; }
+        public string squash_option { get; set; }
+        public object suggestion_commit_message { get; set; }
+        public bool auto_devops_enabled { get; set; }
+        public string auto_devops_deploy_strategy { get; set; }
+        public bool autoclose_referenced_issues { get; set; }
+        public bool keep_latest_artifact { get; set; }
+        public string external_authorization_classification_label { get; set; }
+        public bool requirements_enabled { get; set; }
+        public bool security_and_compliance_enabled { get; set; }
+        public List<object> compliance_frameworks { get; set; }
+        public GitLabProjectsPermissions permissions { get; set; }
+    }
+
+
+    ///GitLab Issues///
+    public class AuthorGitLab
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string username { get; set; }
+        public string state { get; set; }
+        public string avatar_url { get; set; }
+        public string web_url { get; set; }
+    }
+
+    public class TimeStatsGitLab
+    {
+        public int time_estimate { get; set; }
+        public int total_time_spent { get; set; }
+        public object human_time_estimate { get; set; }
+        public object human_total_time_spent { get; set; }
+    }
+
+    public class TaskCompletionStatusGitLab
+    {
+        public int count { get; set; }
+        public int completed_count { get; set; }
+    }
+
+    public class LinksGitLab
+    {
+        public string self { get; set; }
+        public string notes { get; set; }
+        public string award_emoji { get; set; }
+        public string project { get; set; }
+    }
+
+    public class ReferencesGitLab
+    {
+        public string @short { get; set; }
+        public string relative { get; set; }
+        public string full { get; set; }
+    }
+
+    public class RootGitLab
+    {
+        public int id { get; set; }
+        public int iid { get; set; }
+        public int project_id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public string state { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime updated_at { get; set; }
+        public object closed_at { get; set; }
+        public object closed_by { get; set; }
+        public List<object> labels { get; set; }
+        public object milestone { get; set; }
+        public List<object> assignees { get; set; }
+        public AuthorGitLab author { get; set; }
+        public string type { get; set; }
+        public object assignee { get; set; }
+        public int user_notes_count { get; set; }
+        public int merge_requests_count { get; set; }
+        public int upvotes { get; set; }
+        public int downvotes { get; set; }
+        public object due_date { get; set; }
+        public bool confidential { get; set; }
+        public object discussion_locked { get; set; }
+        public string issue_type { get; set; }
+        public string web_url { get; set; }
+        public TimeStatsGitLab time_stats { get; set; }
+        public TaskCompletionStatusGitLab task_completion_status { get; set; }
+        public int blocking_issues_count { get; set; }
+        public bool has_tasks { get; set; }
+        public LinksGitLab _links { get; set; }
+        public ReferencesGitLab references { get; set; }
+        public object moved_to_id { get; set; }
+        public object service_desk_reply_to { get; set; }
+    }
+
 }
