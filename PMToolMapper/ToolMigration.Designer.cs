@@ -45,11 +45,12 @@
             this.homeBtn = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblpm = new System.Windows.Forms.Label();
+            this.gitLabInfo1 = new PMToolMapper.GitLabInfo();
             this.tfsInfo1 = new PMToolMapper.TFSInfo();
             this.jiraInfo1 = new PMToolMapper.JiraInfo();
             this.btnDestinationLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
             this.btnCurrentLogin = new PMToolMapper.Resources.Custom_Designs.RoundCornersButton();
-            this.gitLabInfo1 = new PMToolMapper.GitLabInfo();
+            this.dataLoading1 = new PMToolMapper.DataLoading();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -273,6 +274,15 @@
             this.lblpm.Text = "Tool Migration";
             this.lblpm.UseMnemonic = false;
             // 
+            // gitLabInfo1
+            // 
+            this.gitLabInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.gitLabInfo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.gitLabInfo1.Location = new System.Drawing.Point(441, 228);
+            this.gitLabInfo1.Name = "gitLabInfo1";
+            this.gitLabInfo1.Size = new System.Drawing.Size(573, 288);
+            this.gitLabInfo1.TabIndex = 43;
+            // 
             // tfsInfo1
             // 
             this.tfsInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -333,20 +343,21 @@
             this.btnCurrentLogin.UseVisualStyleBackColor = false;
             this.btnCurrentLogin.Click += new System.EventHandler(this.btnCurrentLogin_Click);
             // 
-            // gitLabInfo1
+            // dataLoading1
             // 
-            this.gitLabInfo1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.gitLabInfo1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.gitLabInfo1.Location = new System.Drawing.Point(441, 228);
-            this.gitLabInfo1.Name = "gitLabInfo1";
-            this.gitLabInfo1.Size = new System.Drawing.Size(573, 288);
-            this.gitLabInfo1.TabIndex = 43;
+            this.dataLoading1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dataLoading1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataLoading1.Location = new System.Drawing.Point(495, 279);
+            this.dataLoading1.Name = "dataLoading1";
+            this.dataLoading1.Size = new System.Drawing.Size(478, 197);
+            this.dataLoading1.TabIndex = 44;
             // 
             // ToolMigration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.dataLoading1);
             this.Controls.Add(this.gitLabInfo1);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.buttonMigrate);
@@ -401,5 +412,6 @@
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblpm;
         private GitLabInfo gitLabInfo1;
+        private DataLoading dataLoading1;
     }
 }

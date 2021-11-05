@@ -34,12 +34,15 @@ namespace PMToolMapper
 
         public ToolMigration()
         {
+            LoadingMessage.Loadingmsg = "Migration in progress...";
+
             InitializeComponent();
 
             jiraInfo1.Visible = false;
             tfsInfo1.Visible = false;
             gitLabInfo1.Visible = false;
             lblMigrationProgress.Visible = false;
+            dataLoading1.Visible = false;
 
             loadDropDowns();
 
@@ -79,6 +82,7 @@ namespace PMToolMapper
 
         }
 
+        //load pm tools
         private void loadDropDowns()
         {
 
@@ -100,6 +104,7 @@ namespace PMToolMapper
 
         }
 
+        //from tool
         private void btnCurrentLogin_Click(object sender, EventArgs e)
         {
             LoginOneClicked = true;
@@ -123,7 +128,7 @@ namespace PMToolMapper
 
         }
 
-
+        //Jira Issues Create From TFS
         private void JiraIssuesCreateFromTFS()
         {
 
@@ -191,6 +196,8 @@ namespace PMToolMapper
                     }
 
 
+                    Invoke(new Action(hideForm));
+
                 }
                 else
                 {
@@ -204,7 +211,7 @@ namespace PMToolMapper
             }
         }
 
-
+        //TFS Issues Create from Jira
         private void TFSIssuesCreate()
         {
 
@@ -287,6 +294,7 @@ namespace PMToolMapper
 
                     }
 
+                    Invoke(new Action(hideForm));
 
                 }
                 else
@@ -374,7 +382,7 @@ namespace PMToolMapper
             }
         }
 
-
+        //Jira Issues Create From TFS To GitLab
         private void JiraIssuesCreateFromTFSToGitLab()
         {
 
@@ -455,6 +463,7 @@ namespace PMToolMapper
 
                     }
 
+                    Invoke(new Action(hideForm));
 
                 }
                 else
@@ -472,7 +481,11 @@ namespace PMToolMapper
 
 
 
-
+        /// <summary>
+        /// get Projects From Jira
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void getProjectsJira(object sender, EventArgs e)
         {
 
@@ -550,6 +563,12 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// Get Jira Projects
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse GetResponseProjectsJira(string url, Method method = Method.GET)
         {
             string email = JiraInfoModel.Email;
@@ -564,7 +583,13 @@ namespace PMToolMapper
         }
 
 
-
+        /// <summary>
+        /// Get Projects TFS
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="personalAccessToken"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse GetResponseProjectsTFS(string url, string personalAccessToken, Method method = Method.GET)
         {
 
@@ -578,6 +603,13 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// Get Projects GitLab
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="personalAccessToken"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse GetResponseProjectsGitLab(string url, string personalAccessToken, Method method = Method.GET)
         {
 
@@ -590,7 +622,13 @@ namespace PMToolMapper
         }
 
 
-
+        /// <summary>
+        /// Create Issues GitLab
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="personalAccessToken"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse CreateIssuesGitLab(string url, string personalAccessToken, Method method = Method.POST)
         {
 
@@ -602,7 +640,13 @@ namespace PMToolMapper
 
         }
 
-
+        /// <summary>
+        /// Get Issues GitLab
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="personalAccessToken"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse GetResponseIssuesGitLab(string url, string personalAccessToken, Method method = Method.GET)
         {
 
@@ -615,6 +659,13 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// Get WorkItems From TFS
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="personalAccessToken"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
         public IRestResponse GetResponseWorkItemsTFS(string url, string personalAccessToken, Method method = Method.POST)
         {
 
@@ -628,6 +679,11 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// get Projects From TFS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void getProjectsTFS(object sender, EventArgs e)
         {
 
@@ -708,6 +764,11 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// get Projects From GitLab
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void getProjectsGitLab(object sender, EventArgs e)
         {
             try
@@ -786,6 +847,9 @@ namespace PMToolMapper
         }
 
 
+        /// <summary>
+        /// TFS Issues Create From GitLab
+        /// </summary>
         private void TFSIssuesCreateFromGitLab()
         {
 
@@ -847,6 +911,7 @@ namespace PMToolMapper
 
                     }
 
+                    Invoke(new Action(hideForm));
 
                 }
                 else
@@ -867,7 +932,11 @@ namespace PMToolMapper
 
 
 
-
+        /// <summary>
+        /// To project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDestinationLogin_Click(object sender, EventArgs e)
         {
             LoginOneClicked = false;
@@ -892,6 +961,11 @@ namespace PMToolMapper
             }
         }
 
+        /// <summary>
+        /// Migrate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMigrate_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are You sure You want to migrate selected tools?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -950,6 +1024,10 @@ namespace PMToolMapper
             }
         }
 
+        /// <summary>
+        /// Set delay to avoid interface freeze
+        /// </summary>
+        /// <returns></returns>
         private async Task setDelay()
         {
             await Task.Delay(2000).ConfigureAwait(false);
@@ -1000,7 +1078,7 @@ namespace PMToolMapper
                 if (!string.IsNullOrEmpty(comboBoxSelectProjectEnd.Text) && !string.IsNullOrEmpty(comboBoxSelectProject.Text))
                 {
 
-                    lblMigrationProgress.Visible = true;
+                    dataLoading1.Visible = true;
 
                     setDelay().Wait();
 
@@ -1010,24 +1088,31 @@ namespace PMToolMapper
 
                     long mappingId = ToolMigrationService.insertMappingID(comboBoxSelectProject.Text, comboBoxSelectProjectEnd.Text);
 
+                    buttonMigrate.Enabled = false;
 
                     /////////////////
 
-
+                    //Start data sync
                     if (drpCurrent.Text == "Jira" && drpDestination.Text == "TFS")
                     {
+
                         TFSIssuesCreate();
-                        
+
                     }
                     else if (drpCurrent.Text == "TFS" && drpDestination.Text == "Jira")
                     {
+
                         JiraIssuesCreateFromTFS();
-                    }else if(drpCurrent.Text == "GitLab" && drpDestination.Text == "TFS")
+
+                    }
+                    else if(drpCurrent.Text == "GitLab" && drpDestination.Text == "TFS")
                     {
+
                         TFSIssuesCreateFromGitLab();
                     }
                     else if (drpCurrent.Text == "TFS" && drpDestination.Text == "GitLab")
                     {
+
                         JiraIssuesCreateFromTFSToGitLab();
                     }
 
@@ -1039,11 +1124,7 @@ namespace PMToolMapper
                     //////////////////////
 
 
-                    lblMigrationProgress.Visible = false;
 
-                    this.Hide();
-                    ToolMigrationHistoryReport toolMigrationHistoryReport = new ToolMigrationHistoryReport(1);
-                    toolMigrationHistoryReport.ShowDialog();
 
 
                 }
@@ -1057,6 +1138,20 @@ namespace PMToolMapper
 
             }
         }
+
+
+        private void hideForm()
+        {
+
+            //All done
+            dataLoading1.Visible = false;
+
+            this.Hide();
+            ToolMigrationHistoryReport toolMigrationHistoryReport = new ToolMigrationHistoryReport(1);
+            toolMigrationHistoryReport.ShowDialog();
+
+        }
+
 
         private void jiraInfo1_Load(object sender, EventArgs e)
         {
