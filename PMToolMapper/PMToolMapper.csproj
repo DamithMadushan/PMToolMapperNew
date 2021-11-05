@@ -250,6 +250,9 @@
     <Compile Include="Resources\Custom Designs\RoundTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TextProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TFSInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -336,6 +339,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TextProgressBar.resx">
+      <DependentUpon>TextProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TFSInfo.resx">
       <DependentUpon>TFSInfo.cs</DependentUpon>
     </EmbeddedResource>

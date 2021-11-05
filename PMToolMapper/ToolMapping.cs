@@ -100,12 +100,30 @@ namespace PMToolMapper
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // MappingTempData.fromToolId = listBox1.ValueMember;
+            if (listBox1.GetItemText(listBox1.SelectedItem) == listBox2.GetItemText(listBox2.SelectedItem)) {
+
+                buttonMap.Enabled = false;
+
+            }
+            else
+            {
+                buttonMap.Enabled = true;
+            }
+
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // MappingTempData.toToolId = listBox2.ValueMember;
+            if (listBox1.GetItemText(listBox1.SelectedItem) == listBox2.GetItemText(listBox2.SelectedItem))
+            {
+
+                buttonMap.Enabled = false;
+
+            }
+            else
+            {
+                buttonMap.Enabled = true;
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)

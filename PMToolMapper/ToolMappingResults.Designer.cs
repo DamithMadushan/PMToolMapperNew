@@ -34,17 +34,17 @@
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblNewTool = new System.Windows.Forms.Label();
+            this.extralbl = new System.Windows.Forms.Label();
+            this.commonlbl = new System.Windows.Forms.Label();
             this.lblCommonBasic = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.mappingPercentage = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.homeBtn = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.lblpm = new System.Windows.Forms.Label();
             this.buttonGenerateReport = new System.Windows.Forms.Button();
+            this.textProgressBar1 = new PMToolMapper.TextProgressBar();
+            this.PercentagetextBox1 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
@@ -58,8 +58,8 @@
             this.panel1.Controls.Add(this.listBox3);
             this.panel1.Controls.Add(this.listBox2);
             this.panel1.Controls.Add(this.listBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblNewTool);
+            this.panel1.Controls.Add(this.extralbl);
+            this.panel1.Controls.Add(this.commonlbl);
             this.panel1.Controls.Add(this.lblCommonBasic);
             this.panel1.Location = new System.Drawing.Point(1, 75);
             this.panel1.Name = "panel1";
@@ -85,7 +85,8 @@
             // 
             this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox3.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 16;
             this.listBox3.Items.AddRange(new object[] {
@@ -99,7 +100,8 @@
             // listBox2
             // 
             this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
             this.listBox2.Items.AddRange(new object[] {
@@ -114,7 +116,8 @@
             // 
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
             this.listBox1.Items.AddRange(new object[] {
@@ -125,68 +128,53 @@
             this.listBox1.Size = new System.Drawing.Size(381, 468);
             this.listBox1.TabIndex = 11;
             // 
-            // label1
+            // extralbl
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(954, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(273, 22);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Extra features of destination tool ";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.extralbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.extralbl.AutoSize = true;
+            this.extralbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.extralbl.ForeColor = System.Drawing.Color.CadetBlue;
+            this.extralbl.Location = new System.Drawing.Point(933, 10);
+            this.extralbl.Name = "extralbl";
+            this.extralbl.Size = new System.Drawing.Size(328, 22);
+            this.extralbl.TabIndex = 10;
+            this.extralbl.Text = "Extra Features Of Destination Tool ";
+            this.extralbl.Click += new System.EventHandler(this.label1_Click);
             // 
-            // lblNewTool
+            // commonlbl
             // 
-            this.lblNewTool.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblNewTool.AutoSize = true;
-            this.lblNewTool.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNewTool.Location = new System.Drawing.Point(532, 10);
-            this.lblNewTool.Name = "lblNewTool";
-            this.lblNewTool.Size = new System.Drawing.Size(239, 22);
-            this.lblNewTool.TabIndex = 9;
-            this.lblNewTool.Text = "Common advanced features ";
+            this.commonlbl.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.commonlbl.AutoSize = true;
+            this.commonlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.commonlbl.ForeColor = System.Drawing.Color.CadetBlue;
+            this.commonlbl.Location = new System.Drawing.Point(521, 10);
+            this.commonlbl.Name = "commonlbl";
+            this.commonlbl.Size = new System.Drawing.Size(272, 22);
+            this.commonlbl.TabIndex = 9;
+            this.commonlbl.Text = "Common Advanced Features ";
             // 
             // lblCommonBasic
             // 
             this.lblCommonBasic.AutoSize = true;
-            this.lblCommonBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCommonBasic.Location = new System.Drawing.Point(92, 10);
+            this.lblCommonBasic.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCommonBasic.ForeColor = System.Drawing.Color.CadetBlue;
+            this.lblCommonBasic.Location = new System.Drawing.Point(83, 10);
             this.lblCommonBasic.Name = "lblCommonBasic";
-            this.lblCommonBasic.Size = new System.Drawing.Size(203, 22);
+            this.lblCommonBasic.Size = new System.Drawing.Size(233, 22);
             this.lblCommonBasic.TabIndex = 6;
-            this.lblCommonBasic.Text = "Common basic features ";
+            this.lblCommonBasic.Text = "Common Basic Features ";
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label2.Location = new System.Drawing.Point(12, 644);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(385, 22);
             this.label2.TabIndex = 14;
             this.label2.Text = "Percentage of matching possibility of both tools";
-            // 
-            // mappingPercentage
-            // 
-            this.mappingPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.mappingPercentage.BackColor = System.Drawing.SystemColors.Control;
-            this.mappingPercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mappingPercentage.Location = new System.Drawing.Point(585, 643);
-            this.mappingPercentage.Name = "mappingPercentage";
-            this.mappingPercentage.ReadOnly = true;
-            this.mappingPercentage.Size = new System.Drawing.Size(100, 23);
-            this.mappingPercentage.TabIndex = 15;
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar1.Location = new System.Drawing.Point(403, 643);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(167, 23);
-            this.progressBar1.TabIndex = 17;
             // 
             // pnlTop
             // 
@@ -266,15 +254,39 @@
             this.buttonGenerateReport.UseVisualStyleBackColor = false;
             this.buttonGenerateReport.Click += new System.EventHandler(this.buttonGenerateReport_Click);
             // 
+            // textProgressBar1
+            // 
+            this.textProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textProgressBar1.CustomText = "";
+            this.textProgressBar1.Location = new System.Drawing.Point(414, 644);
+            this.textProgressBar1.Name = "textProgressBar1";
+            this.textProgressBar1.ProgressColor = System.Drawing.Color.ForestGreen;
+            this.textProgressBar1.Size = new System.Drawing.Size(203, 23);
+            this.textProgressBar1.TabIndex = 20;
+            this.textProgressBar1.TextColor = System.Drawing.Color.Black;
+            this.textProgressBar1.TextFont = new System.Drawing.Font("Times New Roman", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.textProgressBar1.VisualMode = PMToolMapper.ProgressBarDisplayMode.NoText;
+            // 
+            // PercentagetextBox1
+            // 
+            this.PercentagetextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.PercentagetextBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.PercentagetextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PercentagetextBox1.Location = new System.Drawing.Point(636, 644);
+            this.PercentagetextBox1.Name = "PercentagetextBox1";
+            this.PercentagetextBox1.Size = new System.Drawing.Size(100, 23);
+            this.PercentagetextBox1.TabIndex = 21;
+            this.PercentagetextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // ToolMappingResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 687);
+            this.Controls.Add(this.PercentagetextBox1);
+            this.Controls.Add(this.textProgressBar1);
             this.Controls.Add(this.buttonGenerateReport);
             this.Controls.Add(this.pnlTop);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.mappingPercentage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -296,20 +308,20 @@
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblNewTool;
+        private System.Windows.Forms.Label commonlbl;
         private System.Windows.Forms.Label lblCommonBasic;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label extralbl;
         private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox mappingPercentage;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblMappingInfo;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Button homeBtn;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblpm;
         private System.Windows.Forms.Button buttonGenerateReport;
+        private TextProgressBar textProgressBar1;
+        private System.Windows.Forms.TextBox PercentagetextBox1;
     }
 }
